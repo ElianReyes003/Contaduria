@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('factura', function (Blueprint $table) {
-            $table->id('pkFactura')->autoIncrement();
-            $table->text('facturaNombre');
-            $table->date('fechaFactura');
-            $table->unsignedBigInteger('fkCliente');
-            $table->foreign("fkCliente")->references("pkCliente")->on("cliente");
+        Schema::create('facturaCompañia', function (Blueprint $table) {
+            $table->id('pkFacturaCompañia')->autoIncrement();
+            $table->text('facturaNombreCompañia');
+            $table->date('fechaFacturaCompañia');
+            $table->unsignedBigInteger('fkCompañiaCliente');
+            $table->foreign("fkCompañiaCliente")->references("pkCompañiaCliente")->on("compañiaCliente");
             $table->unsignedBigInteger('fkTipoFactura');
             $table->foreign("fkTipoFactura")->references("pkTipoFactura")->on("tipoFactura");
             $table->smallInteger("estatus");

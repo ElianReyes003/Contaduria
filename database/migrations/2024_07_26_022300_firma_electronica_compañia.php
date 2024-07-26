@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('firmaElectronica', function (Blueprint $table) {
-            $table->id('pkFirmaElectronica')->autoIncrement();
-            $table->date('fechaInicioFirma');
-            $table->date('fechaFinalFirma');
-            $table->unsignedBigInteger('fkCliente');
-            $table->foreign("fkCliente")->references("pkCliente")->on("cliente");
+        Schema::create('firmaElectronicaCompañia', function (Blueprint $table) {
+            $table->id('pkFirmaElectronicaCompañia')->autoIncrement();
+            $table->date('fechaInicioFirmaCompañia');
+            $table->date('fechaFinalFirmaCompañia');
+            $table->unsignedBigInteger('fkCompañiaCliente');
+            $table->foreign("fkCompañiaCliente")->references("pkCompañiaCliente")->on("compañiaCliente");
             $table->unsignedBigInteger('fkTipoFirmaElectronica');
             $table->foreign("fkTipoFirmaElectronica")->references("pkTipoFirmaElectronica")->on("tipoFirmaElectronica");
             $table->smallInteger("estatus");
