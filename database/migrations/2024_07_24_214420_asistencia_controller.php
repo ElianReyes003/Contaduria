@@ -18,7 +18,7 @@ return new class extends Migration
             $table->time('horaFinal');
             $table->unsignedBigInteger('fkEmpleado');
             $table->foreign("fkEmpleado")->references("pkEmpleado")->on("empleado");
-            $table->smallInteger("estatus");
+            $table->smallInteger("estatusAsistencia");
             $table->timestamps();
     
          });

@@ -14,8 +14,14 @@ return new class extends Migration
         Schema::create('compañia', function (Blueprint $table) {
             $table->id('pkCompañia')->autoIncrement();
             $table->string('codigoCompañia',90);
-            $table->string('nombreCompañia',90);
-            $table->smallInteger("estatus");
+            $table->string('nombreComercial',200);
+            $table->string('rfc',30);
+            $table->text('denominacion');
+            $table->string('regimenCapital',40);
+            $table->date('fechaOperaciones');
+            $table->date('fechaCambioEstado');
+            $table->smallInteger('estatusPatron');
+            $table->smallInteger("estatusCompañia");
             $table->timestamps();
     
             });

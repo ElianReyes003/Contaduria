@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign("fkEmpleado")->references("pkEmpleado")->on("empleado");
             $table->unsignedBigInteger('fkTipoSolicitudSuper');
             $table->foreign("fkTipoSolicitudSuper")->references("pkTipoSolicitudSuper")->on("tipoSolicitudSuper");
-            $table->smallInteger("estatus");
+            $table->smallInteger("estatusSolicitudSuper");
             $table->timestamps();
          });
     }

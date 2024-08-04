@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('contraseña',45);
             $table->unsignedBigInteger('fkTipoEmpleado');
             $table->foreign("fkTipoEmpleado")->references("pkTipoEmpleado")->on("tipoEmpleado");
-            $table->smallInteger("estatus");
+            $table->smallInteger("estatusEmpleado");
             $table->timestamps();
     
             });
