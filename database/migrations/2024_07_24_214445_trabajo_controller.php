@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('trabajoDetalle');
             $table->date('fechaTrabajo');
             $table->foreign("fkClienteEmpleado")->references("pkClienteEmpleado")->on("clienteEmpleado");
-            $table->smallInteger("estatus");
+            $table->smallInteger("estatusTrabajo");
             $table->timestamps();
     
          });

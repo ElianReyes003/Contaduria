@@ -8,21 +8,23 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     */
-    public function up(): void
+     */  public function up(): void
     {
-        Schema::create('tipoFirmaElectronica', function (Blueprint $table) {
-            $table->id('pkTipoFirmaElectronica')->autoIncrement();
-            $table->string('nombreTipoFirmaElectronica',50);
+        Schema::create('moneda', function (Blueprint $table) {
+            $table->id('pkMoneda')->autoIncrement();
+            $table->string('nombreMoneda',80);
+            $table->smallInteger("estatusMoneda");
             $table->timestamps();
-        });
+    
+         });
     }
+    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipoFirmaElectronica');
+        //
     }
 };

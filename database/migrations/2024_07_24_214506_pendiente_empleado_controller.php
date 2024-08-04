@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign("fkEmpleado")->references("pkEmpleado")->on("empleado");
             $table->unsignedBigInteger('fkTipoPendiente');
             $table->foreign("fkTipoPendiente")->references("pkTipoPendiente")->on("tipoPendiente");
-            $table->smallInteger("estatus");
+            $table->smallInteger("estatusPendienteEmpleado");
             $table->timestamps();
          });
     }

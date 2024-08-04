@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('firmaElectronicaCompañia', function (Blueprint $table) {
-            $table->id('pkFirmaElectronicaCompañia')->autoIncrement();
-            $table->date('fechaInicioFirmaCompañia');
-            $table->date('fechaFinalFirmaCompañia');
+        Schema::create('documentosCliente', function (Blueprint $table) {
+            $table->id('pkDocumentosCliente')->autoIncrement();
+            $table->date('fechaExpedicion');
+            $table->date('fechaVencimiento');
+            $table->text('documentoCliente');
             $table->unsignedBigInteger('fkCompañiaCliente');
             $table->foreign("fkCompañiaCliente")->references("pkCompañiaCliente")->on("compañiaCliente");
-            $table->unsignedBigInteger('fkTipoFirmaElectronica');
-            $table->foreign("fkTipoFirmaElectronica")->references("pkTipoFirmaElectronica")->on("tipoFirmaElectronica");
-            $table->smallInteger("estatus");
+            $table->unsignedBigInteger('fkTipoDocumento');
+            $table->foreign("fkTipoDocumento")->references("pkTipoDocumento")->on("tipoDocumento");
+            $table->smallInteger("estatusProceso");
+            $table->smallInteger("estatusDocumentoCliente");
             $table->timestamps();
     
          });

@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipoFactura', function (Blueprint $table) {
-            $table->id('pkTipoFactura')->autoIncrement();
-            $table->string('nombreTipoFactura',50);
+        Schema::create('tipoCambio', function (Blueprint $table) {
+            $table->id('pkTipoCambio')->autoIncrement();
+            $table->string('nombreTipoCambio',80);
+            $table->smallInteger("estatusTipoCambio");
             $table->timestamps();
-        });
+    
+         });
     }
 
     /**
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipoFactura');
+        //
     }
 };

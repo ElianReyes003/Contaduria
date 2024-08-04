@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign("fkCompañia")->references("pkCompañia")->on("compañia");
             $table->unsignedBigInteger('fkCliente');
             $table->foreign("fkCliente")->references("pkCliente")->on("cliente");
-            $table->smallInteger("estatus");
+            $table->smallInteger("estatusCompañiaCliente");
             $table->timestamps();
          });
     }

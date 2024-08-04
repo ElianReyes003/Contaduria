@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('fechaSolicitudAsistencia');
             $table->unsignedBigInteger('fkEmpleado');
             $table->foreign("fkEmpleado")->references("pkEmpleado")->on("empleado");
-            $table->smallInteger("estatus");
+            $table->smallInteger("estatusSolicitudAsistencia");
             $table->timestamps();
          });
     }
