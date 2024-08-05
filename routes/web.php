@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\empleadoController;
+use App\Http\Controllers\persona_fisica_controller;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,17 @@ Route::get('/', function () {
 });
 
 
+Route::get('/FormAggPhisicalCostumer', function () {
+    return view('agregarClientePersonaFisica');
+});
+
+
+
+Route::post('/aggNewPhisicalCostumer', [persona_fisica_controller::class,"agregarClienteFisico"])->name('cliente.insertar');
+
+    return view('login');
+});
+
 
 Route::get('/RegistrarEmpleado', function () {
     return view('agregarEmpleado');
@@ -36,6 +48,7 @@ Route::get('/allEmployees', [empleadoController::class,"mostrarEmpleados"])->nam
 Route::post('/updateEmployee', [empleadoController::class,"actualizar"])->name('empleado.actualizar');
 Route::post('/deleteEmployee', [empleadoController::class,"baja"])->name('empleado.baja');
 Route::get('/idEmployee/{pkEmpleado}/{vista?}', [empleadoController::class,"mostrarEmpleadoPorId"])->name('empleado.mostrarPorId');
+
 
 
 

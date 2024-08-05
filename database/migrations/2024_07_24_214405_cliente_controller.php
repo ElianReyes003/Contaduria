@@ -17,12 +17,14 @@ return new class extends Migration
         $table->string('rfc',20);
         $table->string('curp',20);
         $table->date('fecha_inicio_operaciones');
+        $table->date('fecha_ultimo_cambio_de_estado');
         $table->string('nombreUsuarioCliente',45);
         $table->string('contraseñaCliente',45);
-        $table->unsignedBigInteger('fkTipoCliente');
-        $table->foreign("fkTipoCliente")->references("pkTipoCliente")->on("tipoCliente");
         $table->smallInteger("estatusPatron");
         $table->smallInteger("estatusCliente");
+        $table->unsignedBigInteger('fkPersona');
+        $table->foreign("fkPersona")->references("pkPersona")->on("persona");
+
         $table->timestamps();
 
         });
