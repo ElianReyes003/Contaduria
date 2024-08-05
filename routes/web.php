@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\persona_fisica_controller;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +16,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+
+    return view('welcome');
+});
+
+
+Route::get('/FormAggPhisicalCostumer', function () {
+    return view('agregarClientePersonaFisica');
+});
+
+
+
+Route::post('/aggNewPhisicalCostumer', [persona_fisica_controller::class,"agregarClienteFisico"])->name('cliente.insertar');
+
     return view('login');
 });
+
