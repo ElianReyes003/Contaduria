@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('empleado', function (Blueprint $table) {
             $table->id('pkEmpleado')->autoIncrement();
-            $table->string('codigoEmpleado',90);
             $table->string('nombreEmpleado',90);
             $table->string('nombreUsuario',45);
             $table->string('contraseña',45);
             $table->unsignedBigInteger('fkTipoEmpleado');
             $table->foreign("fkTipoEmpleado")->references("pkTipoEmpleado")->on("tipoEmpleado");
-            $table->smallInteger("estatusEmpleado");
+            $table->smallInteger("estatus");
             $table->timestamps();
     
             });

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\empleadoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +18,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login');
 });
+
+
+
+Route::get('/RegistrarEmpleado', function () {
+    return view('agregarEmpleado');
+})->name('formEmpleado');
+
+Route::get('/listaEmpleados', function () {
+    return view('listaEmpleado');
+});
+
+
+//---------------------EMPLEADOS----------------------//
+Route::post('/aggNewEmployee', [empleadoController::class,"agregar"])->name('empleado.agregar');
+Route::get('/allEmployees', [empleadoController::class,"mostrarEmpleados"])->name('empleado.mostrar');
+Route::post('/updateEmployee', [empleadoController::class,"actualizar"])->name('empleado.actualizar');
+Route::post('/deleteEmployee', [empleadoController::class,"baja"])->name('empleado.baja');
+Route::get('/idEmployee/{pkEmpleado}/{vista?}', [empleadoController::class,"mostrarEmpleadoPorId"])->name('empleado.mostrarPorId');
+
+
+
