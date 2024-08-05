@@ -24,8 +24,8 @@ return new class extends Migration
         $table->text('entreCalle');
         $table->text('yCalle');
         $table->text('correoElectronico');
-        $table->unsignedBigInteger('fkTipoCliente');
-        $table->foreign("fkTipoCliente")->references("pkTipoCliente")->on("tipoCliente");
+        $table->unsignedBigInteger('fkCliente');
+        $table->foreign("fkCliente")->references("pkCliente")->on("cliente");
         $table->smallInteger("estatusDomicilio");
         $table->timestamps();
 
