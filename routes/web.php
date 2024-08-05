@@ -16,6 +16,7 @@ use App\Http\Controllers\persona_fisica_controller;
 */
 
 Route::get('/', function () {
+
     return view('welcome');
 });
 
@@ -27,3 +28,7 @@ Route::get('/FormAggPhisicalCostumer', function () {
 
 
 Route::post('/aggNewPhisicalCostumer', [persona_fisica_controller::class,"agregarClienteFisico"])->name('cliente.insertar');
+
+    return view('login');
+});
+
