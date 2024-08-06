@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ClienteCompañia extends Model
 {
     use HasFactory;
-    protected $table="clientecompañia";
+    protected $table="compañiacliente";
     //si mi id se hubiera llamado diferente
-    protected $primaryKey='pkCLienteCompañia';
+    protected $primaryKey='pkCompañiaCliente';
     public $timestamps=false;
 }
