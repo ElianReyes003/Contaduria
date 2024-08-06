@@ -59,7 +59,7 @@
             @foreach ($datosEmpleados as $empleado)
                 <tr>
                     <td>{{ $empleado->pkEmpleado }}</td>
-                    <td>{{ $empleado->nombreEmpleado }}</td>
+                    <td>{{ $empleado->persona->nombre_completo }}</td>
                     <td>{{ $empleado->nombreUsuario }}</td>
                     <td>{{ $empleado->contraseña }}</td>
                     <td>

@@ -15,24 +15,24 @@
     <form  action="{{ route('empleado.actualizar') }}" method="POST">
         @csrf
         <div>
-            <h2>Actualzar datos del empleado ({{ $dato->nombreEmpleado }})</h2>
-            <input type="hidden" name="pkEmpleado" value="{{ $dato->pkEmpleado}}">
+            <h2>Actualzar datos del empleado ({{$dato->persona->nombre_completo }})</h2>
+            <input type="hidden" name="pkEmpleado" value="{{ $dato->pkEmpleado }}">
             <hr>
             <div>
                 <h3>Datos personales</h3>
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" value="{{ $dato->nombreEmpleado }}"  required>
+                <input type="text" name="nombre" id="nombre" value="{{ $dato->persona->nombre }}"  required>
                 <label for="apellidop">Apellido paterno</label>
-                <input type="text" name="apellidop" id="apellidop" required>
+                <input type="text" name="apellidop" id="apellidop" value="{{ $dato->persona->apellidoPaterno }}"  required>
                 <label for="apellidom">Apellido materno</label>
-                <input type="text" name="apellidom" id="apellidom" required>
+                <input type="text" name="apellidom" id="apellidom" value="{{ $dato->persona->apellidoMaterno }}"  required>
             </div>
             <div>
                 <h3>Datos de acceso</h3>
-                <label for="usuario">Usuario</label>
-                <input type="text" name="usuario" id="usuario" value="{{ $dato->nombreUsuario}}" required>
+                <label for="usuario">Usuario</label> 
+                <input type="text" name="usuario" id="usuario" value="{{ $dato->nombreUsuario }}" required>
                 <label for="password">Contraseña</label>
-                <input type="password" name="password" id="password" value="{{ $dato->contraseña}}" required>
+                <input type="password" name="password" id="password" value="{{ $dato->contraseña }}" required>
             </div>
         </div>
         <button type="submit">Actualizar empleado</button>
