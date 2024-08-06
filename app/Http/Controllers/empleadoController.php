@@ -5,9 +5,71 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Empleado;
 use App\Models\Persona;
+use App\Models\Cliente;
 
 class empleadoController extends Controller
 {
+    public function login(Request $request)
+    {
+        $nombre = $request->input('nombreUsuario');
+        $contraseña = $request->input('contraseña');
+    
+        $empleado = $this->buscarEmpleado($nombre, $contraseña);
+        $cliente = $this->buscarCliente($nombre, $contraseña);
+    
+        if ($empleado) {
+            session([
+                'id' => $empleado->pkEmpleado,
+                'nombre' => $empleado->nombreUsuario,
+                'contraseña' => $empleado->contraseña,
+                'tipo' => $empleado->fkTipoEmpleado
+            ]);
+    
+            if ($empleado->fkTipoEmpleado == 1) {
+                return redirect()->to('/dashboardAdmin')->with('success', '¡Bienvenido(a)!');
+            }
+            if ($empleado->fkTipoEmpleado == 2) {
+                return redirect()->to('/dashboardEmpleado')->with('success', 'Bienvenido(a)');
+            }
+        } elseif ($cliente) {
+            session([
+                'id' => $cliente->pkCliente,
+                'nombre' => $cliente->nombreUsuarioCliente,
+                'contraseña' => $cliente->contraseñaCliente,
+                'tipo' => 3
+            ]);
+            return redirect()->to('/dashboardCliente')->with('success', 'Bienvenido(a) Cliente');
+        } else {
+            return redirect()->back()->withInput()->withErrors(['error' => 'Credenciales incorrectas']);
+        }
+    }
+    
+    private function buscarEmpleado($nombre, $contraseña)
+    {
+        $empleado = Empleado::where('nombreUsuario', $nombre)
+            ->where('estatus', 1)
+            ->first();
+    
+        if ($empleado && $contraseña == $empleado->contraseña) {
+            return $empleado;
+        } else {
+            return null;
+        }
+    }
+    
+    private function buscarCliente($nombre, $contraseña)
+    {
+        $cliente = Cliente::where('nombreUsuarioCliente', $nombre)
+            ->where('estatusCliente', 1)
+            ->first();
+    
+        if ($cliente && $contraseña == $cliente->contraseñaCliente) {
+            return $cliente;
+        } else {
+            return null;
+        }
+    }
+    
     public function agregar(Request $req)
     {
         $persona = new Persona();
@@ -19,7 +81,7 @@ class empleadoController extends Controller
         $empleado = new Empleado();
         $empleado->nombreUsuario = $req->usuario;
         $empleado->contraseña = $req->password;
-        $empleado->fkTipoEmpleado = 1;
+        $empleado->fkTipoEmpleado = 2;
         $empleado->fkPersona = $persona->pkPersona; 
         $empleado->estatus = 1;
         $empleado->save();
@@ -32,7 +94,7 @@ class empleadoController extends Controller
 
     public function mostrarEmpleados()
     {
-        $datosEmpleados = Empleado::with('persona')->where('estatus', '1')->get();
+        $datosEmpleados = Empleado::with('persona')->where('estatus', '1')->where('fkTipoEmpleado', '2')->get();
         return view('listaEmpleado', compact('datosEmpleados'));
     }
 

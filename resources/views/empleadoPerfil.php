@@ -3,15 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard (Empleado) | JP Despacho Contable</title>
+    <link rel="stylesheet" href="{{asset('css/normalize.css')}}">
 </head>
 <body>
-    <div>
-        <div>Empleado Perfil</div>    
- 
-    </div>
-
-
-
+    <h1>Aqui va el inicio del empleado</h1>
 </body>
 </html>
