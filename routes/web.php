@@ -29,6 +29,21 @@ Route::post('/aggNewPhisicalCostumer', [persona_fisica_controller::class,"agrega
 
 
 
+
+//---------------------REEDIRECCIPON USUARIOS----------------------//
+Route::get('/dashboardAdmin', function () {
+    return view('paginaInicio');
+});
+
+Route::get('/dashboardCliente', function () {
+    return view('detalleCliente');
+});
+
+Route::get('/dashboardEmpleado', function () {
+    return view('empleadoPerfil');
+});
+
+//---------------------EMPLEADOS----------------------//
 Route::get('/RegistrarEmpleado', function () {
     return view('agregarEmpleado');
 })->name('formEmpleado');
@@ -37,7 +52,7 @@ Route::get('/listaEmpleados', function () {
     return view('listaEmpleado');
 });
 
-//---------------------EMPLEADOS----------------------//
+Route::post('/inicioSesion', [empleadOController::class, 'login'])->name('inicioSesion');
 Route::post('/aggNewEmployee', [empleadoController::class,"agregar"])->name('empleado.agregar');
 Route::get('/allEmployees', [empleadoController::class,"mostrarEmpleados"])->name('empleado.mostrar');
 Route::post('/updateEmployee', [empleadoController::class,"actualizar"])->name('empleado.actualizar');
