@@ -25,12 +25,8 @@ Route::get('/FormAggPhisicalCostumer', function () {
     return view('agregarClientePersonaFisica');
 });
 
-
-
 Route::post('/aggNewPhisicalCostumer', [persona_fisica_controller::class,"agregarClienteFisico"])->name('cliente.insertar');
 
-    return view('login');
-});
 
 
 Route::get('/RegistrarEmpleado', function () {
@@ -40,7 +36,6 @@ Route::get('/RegistrarEmpleado', function () {
 Route::get('/listaEmpleados', function () {
     return view('listaEmpleado');
 });
-
 
 //---------------------EMPLEADOS----------------------//
 Route::post('/aggNewEmployee', [empleadoController::class,"agregar"])->name('empleado.agregar');
