@@ -29,9 +29,6 @@ Route::get('/aggCostumerMoral', function () {
 
 
 
-
-
-
 Route::post('/agregarClienteCompañia', [persona_fisica_controller::class,"repartirClienteFisicoMoral"])->name('empleadoSeleccionarClienteCompañia.agregar');
 
 Route::get('/FormAggPhisicalCostumer', [persona_fisica_controller::class,"mostrarPersonasFisicasGeneral"])->name('clienteSeleccionar.mostrar');
@@ -82,9 +79,12 @@ Route::get('/morallCostumersList', [persona_moral_controller::class,"listaGenera
 
 Route::get('/detallePersonaFisica/{pkCliente}/{vista?}', [persona_fisica_controller::class,"PersonasFisicaEspecifica"])->name('clienteFisico.detalle');
 
+
 Route::post('/aggNewPhisicalCostumer', [persona_fisica_controller::class,"agregarClienteFisico"])->name('cliente.insertar');
 
 
+
+Route::post('/aggNewPhisicalCostumer', [persona_fisica_controller::class,"agregarClienteFisico"])->name('cliente.insertar');
 
 
 //---------------------REEDIRECCIPON USUARIOS----------------------//
@@ -116,7 +116,4 @@ Route::get('/allEmployees', [empleadoController::class,"mostrarEmpleados"])->nam
 Route::post('/updateEmployee', [empleadoController::class,"actualizar"])->name('empleado.actualizar');
 Route::post('/deleteEmployee', [empleadoController::class,"baja"])->name('empleado.baja');
 Route::get('/idEmployee/{pkEmpleado}/{vista?}', [empleadoController::class,"mostrarEmpleadoPorId"])->name('empleado.mostrarPorId');
-
-
-
 
