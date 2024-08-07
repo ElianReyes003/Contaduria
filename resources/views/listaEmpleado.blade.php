@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         .dropdown-menu {
             display: none;
@@ -18,18 +20,22 @@
             border: 1px solid #ddd;
             z-index: 1000;
         }
+
         .dropdown-menu.show {
             display: block;
         }
+
         .dropdown-menu a {
             display: block;
             padding: 8px 16px;
             color: #333;
             text-decoration: none;
         }
+
         .dropdown-menu a:hover {
             background-color: #f8f9fa;
         }
+
         .dropdown {
             position: relative;
             display: inline-block;
@@ -38,6 +44,7 @@
 </head>
 
 <body>
+    @include('alertas')
     <div>
         <div>
             {{-- Icono --}}
@@ -71,6 +78,7 @@
                                 Acciones
                             </button>
                             <div class="dropdown-menu">
+
                                 <a href="{{ route('empleado.mostrarPorId', ['pkEmpleado' => $empleado->pkEmpleado, 'vista' => 'editarEmpleado']) }}">Editar</a>
 
                                 <a href="{{ route('personaSeleccionarCompañiaCliente.select', [ 'pkEmpleado' => $empleado->pkEmpleado]) }}">Repartir Clientes</a>
@@ -81,6 +89,15 @@
 
                                 
                                 <form action="{{ route('empleado.baja') }}" method="POST" style="display: inline;">
+
+                                <a
+                                    href="{{ route('empleado.mostrarPorId', ['pkEmpleado' => $empleado->pkEmpleado, 'vista' => 'editarEmpleado']) }}">Editar</a>
+                                <button onclick="confirmarBaja(event)" title="Dar de baja"
+                                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">
+                                    Dar de baja
+                                </button>
+                                <form id="bajaForm" action="{{ route('empleado.baja') }}" method="POST" style="display: none;">
+
                                     @csrf
                                     <input type="hidden" name="pkEmpleado" value="{{ $empleado->pkEmpleado }}">
                                     <button type="submit">Dar de baja empleado</button>
@@ -98,18 +115,32 @@
             $('#empleadosTable').DataTable();
         });
 
-         
-          $('.dropdown-toggle').on('click', function() {
+        $('.dropdown-toggle').on('click', function() {
             $(this).next('.dropdown-menu').toggleClass('show');
         });
-        
-     
+
         $(document).on('click', function(event) {
             if (!$(event.target).closest('.dropdown').length) {
                 $('.dropdown-menu').removeClass('show');
             }
         });
-    
+
+        function confirmarBaja(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Confirmación',
+                text: '¿Desea dar de baja este usuario?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, dar de baja',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('bajaForm').submit();
+                }
+            });
+        }
     </script>
 </body>
 
