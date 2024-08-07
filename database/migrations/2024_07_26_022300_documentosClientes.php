@@ -16,8 +16,13 @@ return new class extends Migration
             $table->date('fechaExpedicion');
             $table->date('fechaVencimiento');
             $table->text('documentoCliente');
-            $table->unsignedBigInteger('fkCompañiaCliente');
-            $table->foreign("fkCompañiaCliente")->references("pkCompañiaCliente")->on("compañiaCliente");
+            $table->text('rutaDocumentoCliente');
+            $table->unsignedBigInteger('fkCliente');
+            $table->foreign("fkCliente")->references("pkCliente")->on("cliente");
+
+            $table->unsignedBigInteger('fkCompañia');
+            $table->foreign("fkCompañia")->references("pkCompañia")->on("compañia");
+
             $table->unsignedBigInteger('fkTipoDocumento');
             $table->foreign("fkTipoDocumento")->references("pkTipoDocumento")->on("tipoDocumento");
             $table->smallInteger("estatusProceso");

@@ -22,7 +22,7 @@
 
     
 
-    <form id="formulario" action="{{ route('cliente.insertar') }}" enctype="multipart/form-data" method="POST">
+    <form id="formulario" action="{{ route('personaFisico.actualizar') }}" enctype="multipart/form-data" method="post">
     @csrf
     <div class="p-4 sm:ml-64 mt-16 md:mt-10">
         <!-- Guias del tamaño del contenedor -->
@@ -32,15 +32,18 @@
                 <div class="flex justify-center mt-5 md:mt-10">
                     <h1 class="text-center font-bold text-2xl">Ingrese los datos de usuario de cliente</h1>
                 </div>
+
+
+                <input type="hidden" name="pkCliente" value="{{$datoPersonaFisica->pkCliente}}">
                 <div class="mt-10">
                     <div class="grid gap-6 mb-6 md:grid-cols-2 mt-10">
                         <div>
                             <label for="nombreUsuarioCliente" class="block mb-2 text-sm font-medium text-gray-900">Nombre Cliente</label>
-                            <input type="text" name="nombreUsuarioCliente" id="nombreUsuarioCliente" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                            <input type="text" name="nombreUsuarioCliente" value="{{$datoPersonaFisica->nombreUsuarioCliente}}"id="nombreUsuarioCliente" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                         </div>
                         <div>
                             <label for="contraseñaCliente" class="block mb-2 text-sm font-medium text-gray-900">Contraseña Cliente</label>
-                            <input type="text" name="contraseñaCliente" id="contraseñaCliente" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                            <input type="text" name="contraseñaCliente"  value="{{$datoPersonaFisica->contraseñaCliente}}" id="contraseñaCliente" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                         </div>
                     </div>
                 </div>
@@ -50,38 +53,39 @@
                 <div class="grid gap-6 mb-6 md:grid-cols-2 mt-10">
                     <div>
                         <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900">Nombre</label>
-                        <input type="text" name="nombre" id="nombre" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="nombre" value="{{$datoPersonaFisica->nombre}}" id="nombre" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="apellidoPaterno" class="block mb-2 text-sm font-medium text-gray-900">Apellido Paterno</label>
-                        <input type="text" name="apellidoPaterno" id="apellidoPaterno" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="apellidoPaterno" value="{{$datoPersonaFisica->apellidoPaterno}}" id="apellidoPaterno" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="apellidoMaterno" class="block mb-2 text-sm font-medium text-gray-900">Apellido Materno</label>
-                        <input type="text" name="apellidoMaterno" id="apellidoMaterno" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="apellidoMaterno"  value="{{$datoPersonaFisica->apellidoMaterno}}" id="apellidoMaterno" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="rfc" class="block mb-2 text-sm font-medium text-gray-900">RFC</label>
-                        <input type="text" name="rfc" id="rfc" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="rfc" id="rfc"   value="{{$datoPersonaFisica->rfc}}" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="curp" class="block mb-2 text-sm font-medium text-gray-900">CURP</label>
-                        <input type="text" name="curp" id="curp" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="curp" id="curp"  value="{{$datoPersonaFisica->curp}}" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="estatusPatron" class="block mb-2 text-sm font-medium text-gray-900">Estatus del patrón</label>
                         <select name="estatusPatron" id="estatusPatron" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5">
-                            <option value="1">Activo</option>
-                            <option value="2">Inactivo</option>
+                            <option value="1" {{ $datoPersonaFisica->estatusPatron == 1 ? 'selected' : '' }}>Activo</option>
+                            <option value="2" {{ $datoPersonaFisica->estatusPatron == 2 ? 'selected' : '' }}>Inactivo</option>
                         </select>
+
                     </div>
                     <div>
                         <label for="fecha_inicio_operaciones" class="block mb-2 text-sm font-medium text-gray-900">Fecha de inicio de operaciones</label>
-                        <input type="date" name="fecha_inicio_operaciones" id="fecha_inicio_operaciones" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" required>
+                        <input type="date" name="fecha_inicio_operaciones" value="{{$datoPersonaFisica->fecha_inicio_operaciones}}" id="fecha_inicio_operaciones" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" required>
                     </div>
                     <div>
                         <label for="fecha_ultimo_cambio_de_estado" class="block mb-2 text-sm font-medium text-gray-900">Fecha de último cambio de estado</label>
-                        <input type="date" name="fecha_ultimo_cambio_de_estado" id="fecha_ultimo_cambio_de_estado" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" required>
+                        <input type="date" name="fecha_ultimo_cambio_de_estado" value="{{$datoPersonaFisica->fecha_ultimo_cambio_de_estado}}" id="fecha_ultimo_cambio_de_estado" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" required>
                     </div>
                 </div>
                 <div class="flex justify-center mt-5 md:mt-10">
@@ -90,47 +94,47 @@
                 <div class="grid gap-6 mb-6 md:grid-cols-2 mt-10">
                     <div>
                         <label for="codigoPostal" class="block mb-2 text-sm font-medium text-gray-900">Código Postal</label>
-                        <input type="text" name="codigoPostal" id="codigoPostal" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="codigoPostal" value="{{$datoPersonaFisica->codigoPostal}}" id="codigoPostal" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="tipoViabilidad" class="block mb-2 text-sm font-medium text-gray-900">Tipo Viabilidad</label>
-                        <input type="text" name="tipoViabilidad" id="tipoViabilidad" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="tipoViabilidad" value="{{$datoPersonaFisica->tipoViabilidad}}" id="tipoViabilidad" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="nombreViabilidad" class="block mb-2 text-sm font-medium text-gray-900">Nombre de Viabilidad</label>
-                        <input type="text" name="nombreViabilidad" id="nombreViabilidad" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="nombreViabilidad"  value="{{$datoPersonaFisica->nombreViabilidad}}"id="nombreViabilidad" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="numeroInterior" class="block mb-2 text-sm font-medium text-gray-900">Número interior</label>
-                        <input type="text" name="numeroInterior" id="numeroInterior" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="numeroInterior" value="{{$datoPersonaFisica->numeroInterior}}" id="numeroInterior" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="colonia" class="block mb-2 text-sm font-medium text-gray-900">Colonia</label>
-                        <input type="text" name="colonia" id="colonia" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="colonia"  value="{{$datoPersonaFisica->colonia}}" id="colonia" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="localidad" class="block mb-2 text-sm font-medium text-gray-900">Localidad</label>
-                        <input type="text" name="localidad" id="localidad" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="localidad" value="{{$datoPersonaFisica->localidad}}" id="localidad" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="municipio" class="block mb-2 text-sm font-medium text-gray-900">Municipio</label>
-                        <input type="text" name="municipio" id="municipio" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="municipio" value="{{$datoPersonaFisica->municipio}}" id="municipio" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="entidadFederativa" class="block mb-2 text-sm font-medium text-gray-900">Entidad Federativa</label>
-                        <input type="text" name="entidadFederativa" id="entidadFederativa" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="entidadFederativa" value="{{$datoPersonaFisica->entidadFederativa}}" id="entidadFederativa" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="entreCalle" class="block mb-2 text-sm font-medium text-gray-900">Entre Calle</label>
-                        <input type="text" name="entreCalle" id="entreCalle" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="entreCalle" id="entreCalle" value="{{$datoPersonaFisica->entreCalle}}"  class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="yCalle" class="block mb-2 text-sm font-medium text-gray-900">Y Calle</label>
-                        <input type="text" name="yCalle" id="yCalle" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="yCalle" id="yCalle" value="{{$datoPersonaFisica->yCalle}}" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                     <div>
                         <label for="correoElectronico" class="block mb-2 text-sm font-medium text-gray-900">Correo Electrónico</label>
-                        <input type="text" name="correoElectronico" id="correoElectronico" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
+                        <input type="text" name="correoElectronico" value="{{$datoPersonaFisica->correoElectronico}}" id="correoElectronico" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" placeholder="" required>
                     </div>
                 </div>
             </div>
