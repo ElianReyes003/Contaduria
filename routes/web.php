@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\empleadoController;
 use App\Http\Controllers\persona_fisica_controller;
 use App\Http\Controllers\persona_moral_controller;
-
+use App\Http\Controllers\AsistenciaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +70,8 @@ Route::get('/detallePersonaFisica/{pkCliente}/{vista?}', [persona_fisica_control
 Route::post('/aggNewPhisicalCostumer', [persona_fisica_controller::class,"agregarClienteFisico"])->name('cliente.insertar');
 
 
+
+
 //---------------------REEDIRECCIPON USUARIOS----------------------//
 Route::get('/dashboardAdmin', function () {
     return view('paginaInicio');
@@ -91,6 +93,12 @@ Route::get('/RegistrarEmpleado', function () {
 Route::get('/listaEmpleados', function () {
     return view('listaEmpleado');
 });
+
+Route::get('/justificarTardanza', function () {
+    return view('justificarTardanza');
+});
+
+Route::post('/guardarJustificacion', [AsistenciaController::class, 'guardarJustificacion']);
 
 Route::post('/inicioSesion', [empleadOController::class, 'login'])->name('inicioSesion');
 Route::post('/aggNewEmployee', [empleadoController::class,"agregar"])->name('empleado.agregar');
