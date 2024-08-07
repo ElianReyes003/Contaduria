@@ -7,16 +7,15 @@
     <title>Registrar empleado | JP Despacho Contable</title>
     <link href="{{ asset('img/logo.ico') }}" rel="icon" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
+    @include('alertas')
     <div>
         {{-- Icono --}}
         <h1>Empleados</h1>
     </div>
-    @if (session('success'))
-        <div>{{ session('success') }}</div>
-    @endif
     <form action="{{ route('empleado.agregar') }}" method="POST">
         @csrf
         <div>
