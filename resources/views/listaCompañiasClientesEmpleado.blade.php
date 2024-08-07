@@ -10,108 +10,9 @@
     <link href="{{ asset('img/logo.ico') }}" rel="icon" type="image/x-icon">
 </head>
 <body>
-    <div>
-        <div>Detalle Cliente</div>    
- 
-    </div>
-    <div>
-            {{$datoPersonaFisica->nombre}}
+  
 
-    </div>
-
-    <div>
-            {{$datoPersonaFisica->apellidoPaterno}}
-
-    </div>
-
-    <div>
-            {{$datoPersonaFisica->apellidoMaterno}}
-
-    </div>
-
-    <div>
-            {{$datoPersonaFisica->rfc}}
-
-    </div>
-    <div>
-            {{$datoPersonaFisica->curp}}
-
-    </div>
-    <div>
-            {{$datoPersonaFisica->fecha_inicio_operaciones}}
-
-    </div>
-
-    <div>
-            {{$datoPersonaFisica->fecha_ultimo_cambio_de_estado}}
-
-    </div>
-    <div>
-            {{$datoPersonaFisica->nombreUsuarioCliente}}
-
-    </div>
-
-    <div>
-            {{$datoPersonaFisica->contraseñaCliente}}
-
-    </div>
-    <div>
-            {{$datoPersonaFisica->estatusPatron}}
-
-    </div>
-
-
-
-    <div>
-            {{$datoPersonaFisica->codigoPostal }}
-
-    </div>
-
-    <div>
-            {{$datoPersonaFisica->tipoViabilidad }}
-
-    </div>
-
-    <div>
-            {{$datoPersonaFisica->nombreViabilidad }}
-
-    </div>
-
-    <div>
-            {{$datoPersonaFisica->colonia }}
-
-    </div>
-
-    <div>
-            {{$datoPersonaFisica->localidad}}
-
-    </div>
-
-
-    <div>
-            {{$datoPersonaFisica->municipio}}
-
-    </div>
-
-    <div>
-            {{$datoPersonaFisica->entidadFederativa}}
-
-    </div>
-
-    <div>
-            {{$datoPersonaFisica->entreCalle}}
-
-    </div>
-    <div>
-            {{$datoPersonaFisica->yCalle}}
-
-    </div>
-    <div>
-            {{$datoPersonaFisica->correoElectronico}}
-
-    </div>
-
-    <h2>Clientes Relacionados con la persona fisica</h2>
+    <h2>Clientes Relacionados con {{$datoEmpleado->nombre .' '.$datoEmpleado->apellidoPaterno.' ' .$datoEmpleado->apellidoMaterno }}</h2>
 
 
 
@@ -189,7 +90,7 @@
 
 
                         
-    <h2>Compañia Relacionas con persona Fisica</h2>
+    <h2>Compañia Relacionas con persona Fisica {{$datoEmpleado->nombre .' '.$datoEmpleado->apellidoPaterno.' ' .$datoEmpleado->apellidoMaterno }} </h2>
 
 
     
@@ -261,7 +162,7 @@
 
 
 
-   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.13.6/api/fnMultiFilter.js"></script>

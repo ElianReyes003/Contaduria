@@ -27,12 +27,12 @@ Route::get('/aggCostumerMoral', function () {
     return view('agregarClientePersonaMoral');
 });
 
-<<<<<<< HEAD
 
 
-<<<<<<< HEAD
 
 
+
+Route::post('/agregarClienteCompañia', [persona_fisica_controller::class,"repartirClienteFisicoMoral"])->name('empleadoSeleccionarClienteCompañia.agregar');
 
 Route::get('/FormAggPhisicalCostumer', [persona_fisica_controller::class,"mostrarPersonasFisicasGeneral"])->name('clienteSeleccionar.mostrar');
 
@@ -43,6 +43,15 @@ Route::post('/aggCompanies', [persona_moral_controller::class,"agregarClienteMor
 
 
 Route::get('/detallePersonaMoral/{pkCompañia}/{vista}', [persona_moral_controller::class,"PersonasMoralEspecifica"])->name('personaMoral.detalle');
+
+Route::get('/seleccionarEmpleadooCompañia/{pkEmpleado}', [persona_fisica_controller::class,"CompañiasyClientesElegir"])->name('personaSeleccionarCompañiaCliente.select');
+
+
+Route::get('/detalleClientesSeleccionadosEmployeeX/{pkEmpleado}', [persona_fisica_controller::class,"compañiasYpersonasEmpleado"])->name('personaSeleccionarCompañiaCliente.detalle');
+
+
+
+
 
 
 Route::post('/actualizarCompañia', [persona_moral_controller::class,"actualizarClienteMoral"])->name('personaMoral.actualizar');
@@ -72,9 +81,7 @@ Route::get('/morallCostumersList', [persona_moral_controller::class,"listaGenera
 
 
 Route::get('/detallePersonaFisica/{pkCliente}/{vista?}', [persona_fisica_controller::class,"PersonasFisicaEspecifica"])->name('clienteFisico.detalle');
-=======
-=======
->>>>>>> 35c487ae4c3f63699e3db225817d0ccbb4667e46
+
 Route::post('/aggNewPhisicalCostumer', [persona_fisica_controller::class,"agregarClienteFisico"])->name('cliente.insertar');
 
 
@@ -85,9 +92,7 @@ Route::get('/dashboardAdmin', function () {
     return view('paginaInicio');
 });
 
-<<<<<<< HEAD
->>>>>>> dfce1a13937a2d5888a3a56f06a4ba32f55b7156
-=======
+
 Route::get('/dashboardCliente', function () {
     return view('detalleCliente');
 });
@@ -115,4 +120,3 @@ Route::get('/idEmployee/{pkEmpleado}/{vista?}', [empleadoController::class,"most
 
 
 
->>>>>>> 35c487ae4c3f63699e3db225817d0ccbb4667e46

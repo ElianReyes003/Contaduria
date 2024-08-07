@@ -11,6 +11,11 @@ use App\Models\Compañia;
 use App\Models\clienteClientes;
 use App\Models\ClienteCompañia;
 use App\Models\Domicilio;
+use App\Models\Empleado;
+
+use App\Models\EmpleadoRelacionCliente;
+use App\Models\EmpleadoRelacionCompañia;
+
 use App\Models\documentosClientes;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +25,7 @@ class persona_fisica_controller extends Controller
     {  
 
 
-      dd($req->file('factura')) ;
+   
         $persona = new Persona();
         $persona->nombre = $req->nombre;
         $persona->apellidoPaterno = $req->apellidoPaterno;
@@ -96,7 +101,7 @@ class persona_fisica_controller extends Controller
         $domicilio->estatusDomicilio= 1;
         $domicilio->save();
 
-
+/*
         // Recibe el archivo de firma electrónica desde la solicitud
         $firmaElectronicaFile = $req->file('firmaElectronica');
 
@@ -444,6 +449,127 @@ class persona_fisica_controller extends Controller
 
         return view($vista,compact("datoPersonaFisica","datoPersonaRelacionadas","datosCompañiasRelacionadas","datosPersonasFisicas","datosCompañias"));
       }
+
+
+
+
+
+
+      
+      function CompañiasyClientesElegir($pkEmpleado ){
+
+
+
+
+
+        $datosPersonasFisicas=Persona::join('cliente', 'cliente.fkPersona', '=', 'persona.pkPersona')
+        ->select('persona.*', 'cliente.*')->where('cliente.estatusCliente', '=', '1')->get();
+
+        $datosCompañias=Compañia::select('compañia.*')->where('compañia.estatusCompañia', '=', '1')->get();
+
+
+        $empleado = Empleado::join('persona' , 'empleado.fkPersona', '=', 'persona.pkPersona') ->select('empleado.*', 'persona.*')->where('empleado.pkEmpleado', $pkEmpleado)->first();
+
+
+    
+     
+
+        return view("elegirCompañiaoCliente",compact("datosPersonasFisicas","datosCompañias","pkEmpleado","empleado"));
+      }
+
+
+
+
+      public function repartirClienteFisicoMoral(Request $req)
+      {  
+  
+        $persona = $req->input('pkPersona');
+        $pkEmpleado = $req->input('pkEmpleado');
+          $personaArray = $req->input('persona');
+  
+       
+  
+          for ($i = 0; $i < count( $personaArray ); $i++) {
+              $personaId =  $personaArray [$i];
+           
+  
+              $datoPersonaFisica=Persona::join('cliente', 'cliente.fkPersona', '=', 'persona.pkPersona')
+              ->select('persona.*', 'cliente.*')->where('persona.pkPersona', '=',   $personaId )->first();
+
+              $nuevaRelacionPersona = new EmpleadoRelacionCliente();
+              $nuevaRelacionPersona ->fkCliente= $datoPersonaFisica->pkCliente;
+
+              $nuevaRelacionPersona ->fkEmpleado=$pkEmpleado;
+              $nuevaRelacionPersona ->estatusEmpleadoRelacionCliente=1;
+              $nuevaRelacionPersona->save();
+          }
+  
+  
+          $compañiaArray = $req->input('compañia');
+  
+  
+          for ($i = 0; $i < count( $compañiaArray ); $i++) {
+              $compañiaId =  $compañiaArray [$i];
+
+              $nuevaRelacionPersona = new EmpleadoRelacionCompañia();
+              $nuevaRelacionPersona ->fkCompañia= $compañiaId;
+
+              $nuevaRelacionPersona ->fkEmpleado=$pkEmpleado;
+              $nuevaRelacionPersona ->estatusEmpleadoRelacionCompañia=1;
+
+              $nuevaRelacionPersona ->save();
+          }
+  
+      
+  
+  
+      }
+
+
+
+
+
+
+      
+      function compañiasYpersonasEmpleado( $pkEmpleado){
+
+        
+
+
+        $datoEmpleado=Persona::join('empleado', 'empleado.fkPersona', '=', 'persona.pkPersona')
+        ->select('persona.*', 'empleado.*')->where('empleado.pkEmpleado', '=',   $pkEmpleado )->first();
+      
+        $datoPersonaRelacionadas = EmpleadoRelacionCliente::join('cliente', 'cliente.pkCliente', '=', 'empleadorelacioncliente.fkCliente')
+        ->join('persona', 'cliente.fkPersona', '=', 'persona.pkPersona')
+        ->join('empleado', 'empleado.pkEmpleado', '=', 'empleadorelacioncliente.fkEmpleado')
+        ->select(
+            'persona.*',
+            'cliente.*',
+            'empleado.*',
+            'empleadorelacioncliente.*'
+        )
+        ->where('empleadorelacioncliente.fkEmpleado', '=', $pkEmpleado)
+        ->get();
+
+
+
+        
+      
+
+        $datosCompañiasRelacionadas = EmpleadoRelacionCompañia::join('compañia', 'empleadorelacioncompañia.fkCompañia', '=', 'compañia.pkCompañia')
+        ->select(
+            'compañia.*',
+            'empleadorelacioncompañia.*',
+        )
+        ->where('empleadorelacioncompañia.fkEmpleado', '=', $pkEmpleado)
+        ->get();
+     
+
+        return view("listaCompañiasClientesEmpleado",compact("datoPersonaRelacionadas","datosCompañiasRelacionadas","datoEmpleado"));
+      }
+
+
+
 
 
       
