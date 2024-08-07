@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Document</title>
+=======
+    <title>Dashboard (Cliente) | JP Despacho Contable</title>
+    <link href="{{ asset('img/logo.ico') }}" rel="icon" type="image/x-icon">
+>>>>>>> 35c487ae4c3f63699e3db225817d0ccbb4667e46
 </head>
 <body>
     <div>
         <div>Detalle Cliente</div>    
+<<<<<<< HEAD
  
     </div>
     <div>
@@ -350,5 +356,8 @@ $('#limpiarFiltros').on('click', function () {
 </script>
 
 
+=======
+    </div>
+>>>>>>> 35c487ae4c3f63699e3db225817d0ccbb4667e46
 </body>
 </html>

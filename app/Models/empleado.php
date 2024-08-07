@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class empleado extends Model
+class Empleado extends Model
 {
     use HasFactory;
-    protected $table="empleado";
-    //si mi id se hubiera llamado diferente
-    protected $primaryKey='pkEmpleado';
-    public $timestamps=false;
+
+    protected $table = 'empleado';
+    protected $primaryKey = 'pkEmpleado'; 
+    public $timestamps = false;
+
+    public function persona()
+    {
+        return $this->belongsTo(Persona::class, 'fkPersona', 'pkPersona');
+    }
 }

@@ -13,22 +13,17 @@ return new class extends Migration
     {
         Schema::create('empleado', function (Blueprint $table) {
             $table->id('pkEmpleado')->autoIncrement();
-            $table->string('codigoEmpleado',90);
             $table->string('nombreUsuario',45);
             $table->string('contraseña',45);
             $table->unsignedBigInteger('fkTipoEmpleado');
             $table->foreign("fkTipoEmpleado")->references("pkTipoEmpleado")->on("tipoEmpleado");
             $table->unsignedBigInteger('fkPersona');
             $table->foreign("fkPersona")->references("pkPersona")->on("persona");
-            $table->smallInteger("estatusEmpleado");
+            $table->smallInteger("estatus");
             $table->timestamps();
-    
             });
     }
-
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
         Schema::dropIfExists('empleado');
