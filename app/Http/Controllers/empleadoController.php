@@ -7,6 +7,9 @@ use App\Models\Empleado;
 use App\Models\Persona;
 use App\Models\Cliente;
 
+use Illuminate\Support\Facades\DB;
+
+
 class empleadoController extends Controller
 {
     public function login(Request $request)
@@ -15,28 +18,31 @@ class empleadoController extends Controller
 
         $nombre = $request->input('nombreUsuario');
         $contraseña = $request->input('contraseña');
-    
+
         $empleado = $this->buscarEmpleado($nombre, $contraseña);
         $cliente = $this->buscarCliente($nombre, $contraseña);
-    
+
         if ($empleado) {
             if ($empleado->fkTipoEmpleado == 2) {
                 $horaActual = date('H:i');
                 $horaInicio = '06:00';
                 $horaFin = '22:00';
-                    
+
                 if ($horaActual < $horaInicio || $horaActual > $horaFin) {
                     return redirect(url('/'))->with('erroracces', 'No puedes iniciar sesión fuera del horario permitido (06:00AM - 10:00PM)');
                 }
             }
-    
+
             session([
                 'id' => $empleado->pkEmpleado,
                 'nombre' => $empleado->nombreUsuario,
                 'contraseña' => $empleado->contraseña,
                 'tipo' => $empleado->fkTipoEmpleado
             ]);
-    
+
+            // Registrar asistencia
+            $this->registrarAsistencia($empleado->pkEmpleado);
+
             if ($empleado->fkTipoEmpleado == 1) {
                 return redirect()->to('/dashboardAdmin')->with('success', '¡Bienvenido(a)!');
             }
@@ -55,33 +61,62 @@ class empleadoController extends Controller
             return redirect(url('/'))->with('credentials', 'Credenciales incorrectas');
         }
     }
-    
+
+    private function registrarAsistencia($empleadoId)
+    {
+        $fechaActual = date('Y-m-d');
+        $horaActual = date('H:i');
+
+        $asistencia = DB::table('asistencia')
+            ->where('fkEmpleado', $empleadoId)
+            ->whereDate('fechaAsistencia', $fechaActual)
+            ->first();
+
+        if (!$asistencia) {
+            if ($horaActual <= '8:21') {
+                DB::table('asistencia')->insert([
+                    'fechaAsistencia' => $fechaActual,
+                    'horaInicio' => $horaActual,
+                    'fkEmpleado' => $empleadoId,
+                    'estatusAsistencia' => 1,
+                ]);
+            } else if ($horaActual > '8:21') {
+                DB::table('asistencia')->insert([
+                    'fechaAsistencia' => $fechaActual,
+                    'horaInicio' => $horaActual,
+                    'fkEmpleado' => $empleadoId,
+                    'estatusAsistencia' => 1,
+                ]);
+            }
+        }
+    }
+
     private function buscarEmpleado($nombre, $contraseña)
     {
         $empleado = Empleado::where('nombreUsuario', $nombre)
             ->where('estatus', 1)
             ->first();
-    
+
         if ($empleado && $contraseña == $empleado->contraseña) {
             return $empleado;
         } else {
             return null;
         }
     }
-    
+
     private function buscarCliente($nombre, $contraseña)
     {
         $cliente = Cliente::where('nombreUsuarioCliente', $nombre)
             ->where('estatusCliente', 1)
             ->first();
-    
+
         if ($cliente && $contraseña == $cliente->contraseñaCliente) {
             return $cliente;
         } else {
             return null;
         }
     }
-   
+
     public function agregar(Request $req)
     {
         $persona = new Persona();
@@ -94,7 +129,7 @@ class empleadoController extends Controller
         $empleado->nombreUsuario = $req->usuario;
         $empleado->contraseña = $req->password;
         $empleado->fkTipoEmpleado = 2;
-        $empleado->fkPersona = $persona->pkPersona; 
+        $empleado->fkPersona = $persona->pkPersona;
         $empleado->estatus = 1;
         $empleado->save();
         if ($empleado->pkEmpleado) {
