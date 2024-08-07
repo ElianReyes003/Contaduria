@@ -7,3 +7,7 @@ import dt from 'datatables.net';
 $(document).ready(function() {
     $('#empleadosTable').DataTable();
 });
+$(document).ready(function() {
+    $('#tareaPendientesEmpleado').DataTable();
+});
+

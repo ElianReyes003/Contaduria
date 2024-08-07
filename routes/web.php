@@ -86,14 +86,10 @@ Route::post('/aggNewPhisicalCostumer', [persona_fisica_controller::class,"agrega
 
 Route::post('/aggNewPhisicalCostumer', [persona_fisica_controller::class,"agregarClienteFisico"])->name('cliente.insertar');
 
-
-
-
 //---------------------REEDIRECCIPON USUARIOS----------------------//
 Route::get('/dashboardAdmin', function () {
     return view('paginaInicio');
 });
-
 
 Route::get('/dashboardCliente', function () {
     return view('detalleCliente');
@@ -112,11 +108,8 @@ Route::get('/listaEmpleados', function () {
     return view('listaEmpleado');
 });
 
-Route::get('/justificarTardanza', function () {
-    return view('justificarTardanza');
-});
+Route::get('/dashboardAdmin', [AsistenciaController::class, 'mostrarAsistencia']);
 
-Route::post('/guardarJustificacion', [AsistenciaController::class, 'guardarJustificacion']);
 
 Route::post('/inicioSesion', [empleadOController::class, 'login'])->name('inicioSesion');
 Route::post('/aggNewEmployee', [empleadoController::class,"agregar"])->name('empleado.agregar');
