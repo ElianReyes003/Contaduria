@@ -40,8 +40,9 @@ class empleadoController extends Controller
                 'tipo' => $empleado->fkTipoEmpleado
             ]);
 
-            // Registrar asistencia
+            if ($empleado->fkTipoEmpleado == 2) {
             $this->registrarAsistencia($empleado->pkEmpleado);
+            }
 
             if ($empleado->fkTipoEmpleado == 1) {
                 return redirect()->to('/dashboardAdmin')->with('success', '¡Bienvenido(a)!');
@@ -72,23 +73,18 @@ class empleadoController extends Controller
             ->whereDate('fechaAsistencia', $fechaActual)
             ->first();
 
-        if (!$asistencia) {
-            if ($horaActual <= '8:21') {
+            $horaActual = date('H:i');
+            $horaLimite = ('08:21');
+            
+            if (!$asistencia) {
                 DB::table('asistencia')->insert([
                     'fechaAsistencia' => $fechaActual,
                     'horaInicio' => $horaActual,
                     'fkEmpleado' => $empleadoId,
-                    'estatusAsistencia' => 1,
-                ]);
-            } else if ($horaActual > '8:21') {
-                DB::table('asistencia')->insert([
-                    'fechaAsistencia' => $fechaActual,
-                    'horaInicio' => $horaActual,
-                    'fkEmpleado' => $empleadoId,
-                    'estatusAsistencia' => 1,
+                    'estatusAsistencia' => ($horaActual <= $horaLimite) ? 1 : 2,
                 ]);
             }
-        }
+            
     }
 
     private function buscarEmpleado($nombre, $contraseña)
