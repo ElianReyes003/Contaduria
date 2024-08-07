@@ -11,6 +11,8 @@ class empleadoController extends Controller
 {
     public function login(Request $request)
     {
+        date_default_timezone_set('America/Mazatlan');
+
         $nombre = $request->input('nombreUsuario');
         $contraseña = $request->input('contraseña');
     
@@ -18,6 +20,16 @@ class empleadoController extends Controller
         $cliente = $this->buscarCliente($nombre, $contraseña);
     
         if ($empleado) {
+            if ($empleado->fkTipoEmpleado == 2) {
+                $horaActual = date('H:i');
+                $horaInicio = '06:00';
+                $horaFin = '22:00';
+                    
+                if ($horaActual < $horaInicio || $horaActual > $horaFin) {
+                    return redirect(url('/'))->with('erroracces', 'No puedes iniciar sesión fuera del horario permitido (06:00AM - 10:00PM)');
+                }
+            }
+    
             session([
                 'id' => $empleado->pkEmpleado,
                 'nombre' => $empleado->nombreUsuario,
@@ -40,7 +52,7 @@ class empleadoController extends Controller
             ]);
             return redirect()->to('/dashboardCliente')->with('success', 'Bienvenido(a) Cliente');
         } else {
-            return redirect()->back()->withInput()->withErrors(['error' => 'Credenciales incorrectas']);
+            return redirect(url('/'))->with('credentials', 'Credenciales incorrectas');
         }
     }
     
@@ -69,7 +81,7 @@ class empleadoController extends Controller
             return null;
         }
     }
-    
+   
     public function agregar(Request $req)
     {
         $persona = new Persona();
