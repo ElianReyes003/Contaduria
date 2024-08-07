@@ -28,8 +28,6 @@ Route::get('/FormAggPhisicalCostumer', function () {
 Route::post('/aggNewPhisicalCostumer', [persona_fisica_controller::class,"agregarClienteFisico"])->name('cliente.insertar');
 
 
-
-
 //---------------------REEDIRECCIPON USUARIOS----------------------//
 Route::get('/dashboardAdmin', function () {
     return view('paginaInicio');
