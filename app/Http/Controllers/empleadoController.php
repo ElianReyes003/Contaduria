@@ -57,7 +57,9 @@ class empleadoController extends Controller
                 'contraseña' => $cliente->contraseñaCliente,
                 'tipo' => 3
             ]);
-            return redirect()->to('/dashboardCliente')->with('success', 'Bienvenido(a) Cliente');
+            return redirect()->route('clienteFisico.detalle', ['pkCliente' => session('id')])
+            ->with('success', 'Bienvenido(a) Cliente');
+
         } else {
             return redirect(url('/'))->with('credentials', 'Credenciales incorrectas');
         }

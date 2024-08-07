@@ -55,7 +55,7 @@
                                 
                             
                             <select id="opciones" onchange="redirigir(this)">
-                                                    <option value="">Selecciona una opción</option>
+                                                         <option value="">Selecciona una opción</option>
                                                         <option value="{{  route('clienteFisico.detalle', ['pkCliente' => $dato->pkCliente])  }}">Detalle</option>
                                                         <option value="{{  route('clienteFisico.detalle', ['pkCliente' => $dato->pkCliente ,'vista' => 'editarCliente' ])  }}">Actualizar</option>
                                                         <option value="{{  route('personaFisca.baja', ['pkCliente' => $dato->pkCliente])  }}">Baja</option>
