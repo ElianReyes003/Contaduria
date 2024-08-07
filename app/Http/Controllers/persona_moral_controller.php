@@ -14,8 +14,6 @@ class persona_moral_controller extends Controller
 {
 
 
-
-
     public function agregarClienteMoral(Request $req)
     {  
 

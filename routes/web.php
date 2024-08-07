@@ -17,6 +17,7 @@ use App\Http\Controllers\persona_moral_controller;
 */
 
 Route::get('/', function () {
+
     return view('welcome');
 });
 
@@ -28,6 +29,7 @@ Route::get('/aggCostumerMoral', function () {
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -69,3 +71,10 @@ Route::get('/morallCostumersList', [persona_moral_controller::class,"listaGenera
 
 
 Route::get('/detallePersonaFisica/{pkCliente}/{vista?}', [persona_fisica_controller::class,"PersonasFisicaEspecifica"])->name('clienteFisico.detalle');
+=======
+Route::post('/aggNewPhisicalCostumer', [persona_fisica_controller::class,"agregarClienteFisico"])->name('cliente.insertar');
+
+    return view('login');
+});
+
+>>>>>>> dfce1a13937a2d5888a3a56f06a4ba32f55b7156
