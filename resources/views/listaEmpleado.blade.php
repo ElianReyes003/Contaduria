@@ -70,12 +70,26 @@
                     <td>{{ $empleado->persona->nombre_completo }}</td>
                     <td>{{ $empleado->nombreUsuario }}</td>
                     <td>{{ $empleado->contraseña }}</td>
+
+
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button">
                                 Acciones
                             </button>
                             <div class="dropdown-menu">
+
+                                <a href="{{ route('empleado.mostrarPorId', ['pkEmpleado' => $empleado->pkEmpleado, 'vista' => 'editarEmpleado']) }}">Editar</a>
+
+                                <a href="{{ route('personaSeleccionarCompañiaCliente.select', [ 'pkEmpleado' => $empleado->pkEmpleado]) }}">Repartir Clientes</a>
+
+
+                                <a href="{{ route('personaSeleccionarCompañiaCliente.detalle', [ 'pkEmpleado' => $empleado->pkEmpleado]) }}">Clientes y Compañias</a>
+
+
+                                
+                                <form action="{{ route('empleado.baja') }}" method="POST" style="display: inline;">
+
                                 <a
                                     href="{{ route('empleado.mostrarPorId', ['pkEmpleado' => $empleado->pkEmpleado, 'vista' => 'editarEmpleado']) }}">Editar</a>
                                 <button onclick="confirmarBaja(event)" title="Dar de baja"
@@ -83,6 +97,7 @@
                                     Dar de baja
                                 </button>
                                 <form id="bajaForm" action="{{ route('empleado.baja') }}" method="POST" style="display: none;">
+
                                     @csrf
                                     <input type="hidden" name="pkEmpleado" value="{{ $empleado->pkEmpleado }}">
                                     <button type="submit">Dar de baja empleado</button>
