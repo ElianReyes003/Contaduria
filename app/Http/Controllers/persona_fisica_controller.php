@@ -432,17 +432,21 @@ class persona_fisica_controller extends Controller
         ->join('compañia', 'compañia.pkCompañia', '=', 'empleadorelacioncompañia.fkCompañia')
         ->join('compañiacliente', 'compañiacliente.fkCompañia', '=', 'compañia.pkCompañia')
         ->join('cliente', 'compañiacliente.fkCliente', '=', 'cliente.pkCliente')
-        ->select( 'pendientecliente.*','compañia.*')
+        ->join('tipopendientecliente', 'tipopendientecliente.pkTipoPendienteCliente', '=', 'pendientecliente.fkTipoPendienteCliente')
+        ->select( 'pendientecliente.*','compañia.*','tipopendientecliente.*')
         ->where('compañiacliente.fkCliente', '=', $pkCliente) // Asegúrate de que 'fkCliente1' sea el nombre correcto de la columna
         ->get();
     
 
         $datosPendientes = pendienteCliente::join('empleadorelacioncliente', 'pendientecliente.fkEmpleadoRelacionCliente', '=', 'empleadorelacioncliente.pkEmpleadoRelacionCliente')
         ->join('cliente', 'cliente.pkCliente', '=', 'empleadorelacioncliente.fkCliente')
+        ->join('clienteclientes', 'clienteclientes.fkCliente1', '=', 'cliente.pkCliente')
         ->join('compañiacliente', 'compañiacliente.fkCliente', '=', 'cliente.pkCliente')
         ->join('persona', 'persona.pkPersona', '=', 'cliente.fkPersona')
-        ->select('persona.*', 'cliente.*','pendientecliente.*')
-        ->where('empleadorelacioncliente.fkCliente', '=', $pkCliente) // Asegúrate de que 'fkCliente1' sea el nombre correcto de la columna
+        ->join('tipopendientecliente', 'tipopendientecliente.pkTipoPendienteCliente', '=', 'pendientecliente.fkTipoPendienteCliente')
+
+        ->select('persona.*', 'cliente.*','pendientecliente.*','tipopendientecliente.*')
+        ->where('clienteclientes.fkCliente1', '=', $pkCliente) // Asegúrate de que 'fkCliente1' sea el nombre correcto de la columna
         ->get();
 
     

@@ -117,6 +117,13 @@ Route::get('/dashboardAdmin', [AsistenciaController::class, 'mostrarAsistencia']
 Route::post('/inicioSesion', [empleadOController::class, 'login'])->name('inicioSesion');
 
 
+Route::get('/historialPendientesEmployees', [pendiente_controller::class,"listaHistorialPendientesClientes"])->name('pendienteEmpleados.historial');
+
+Route::get('/historialPendientesCompanies', [pendiente_controller::class,"listaHistorialPendientesCompañias"])->name('pendienteCompañia.historial');
+
+
+
+
 Route::post('/agregarPendientesEmployee', [pendiente_controller::class,"agregarPendiente"])->name('pendienteEmpleado.agregar');
 Route::post('/agregarPendientesCostumer', [pendiente_controller::class,"agregarPendienteCliente"])->name('pendienteCliente.agregar');
 

@@ -83,6 +83,12 @@ class pendiente_controller extends Controller
 
 
 
+
+
+
+
+
+
     public function agregarPendienteCompañia(Request $req)
     
     {
@@ -157,6 +163,41 @@ class pendiente_controller extends Controller
        
     }
 
+
+
+    public function listaHistorialPendientesClientes(Request $req)
+    {
+
+        $datosPendientes = pendienteCliente::join('empleadorelacioncliente', 'pendientecliente.fkEmpleadoRelacionCliente', '=', 'empleadorelacioncliente.pkEmpleadoRelacionCliente')
+        ->join('cliente', 'cliente.pkCliente', '=', 'empleadorelacioncliente.fkCliente')
+        ->join('clienteclientes', 'clienteclientes.fkCliente1', '=', 'cliente.pkCliente')
+        ->join('compañiacliente', 'compañiacliente.fkCliente', '=', 'cliente.pkCliente')
+        ->join('persona', 'persona.pkPersona', '=', 'cliente.fkPersona')
+        ->join('tipopendientecliente', 'tipopendientecliente.pkTipoPendienteCliente', '=', 'pendientecliente.fkTipoPendienteCliente')
+
+        ->select('persona.*', 'cliente.*','pendientecliente.*','tipopendientecliente.*')// Asegúrate de que 'fkCliente1' sea el nombre correcto de la columna
+        ->get();
+        return view('historialPendienteClientes', compact('datosPendientes'));
+
+       
+    }
+
+    public function listaHistorialPendientesCompañias(Request $req)
+    {
+
+       
+        $datosPendientesCompañia =pendienteCliente::join('empleadorelacioncompañia', 'pendientecliente.fkEmpleadoRelacionCompañia', '=', 'empleadorelacioncompañia.pkEmpleadoRelacionCompañia')
+        ->join('compañia', 'compañia.pkCompañia', '=', 'empleadorelacioncompañia.fkCompañia')
+        ->join('compañiacliente', 'compañiacliente.fkCompañia', '=', 'compañia.pkCompañia')
+        ->join('cliente', 'compañiacliente.fkCliente', '=', 'cliente.pkCliente')
+        ->join('tipopendientecliente', 'tipopendientecliente.pkTipoPendienteCliente', '=', 'pendientecliente.fkTipoPendienteCliente')
+        ->select( 'pendientecliente.*','compañia.*','tipopendientecliente.*')
+        // Asegúrate de que 'fkCliente1' sea el nombre correcto de la columna
+        ->get();
+        return view('historialPendienteCompañias', compact('datosPendientesCompañia'));
+
+       
+    }
 
 
 }
