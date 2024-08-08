@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\empleadoController;
 use App\Http\Controllers\persona_fisica_controller;
 use App\Http\Controllers\persona_moral_controller;
+use App\Http\Controllers\pendiente_controller;
 use App\Http\Controllers\AsistenciaController;
 
 /*
@@ -28,6 +29,10 @@ Route::get('/aggCostumerMoral', function () {
 });
 
 
+Route::get('/formularioPendienteCompañia/{pkEmpleado}', [persona_fisica_controller::class,"CompañiaEspecificaFormulario"])->name('pendienteclientecompañiaespecifica.formulario');
+
+
+Route::get('/formularioPendienteClienteCompañia/{pkEmpleado}', [persona_fisica_controller::class,"compañiasYpersonasEmpleadoFormulario"])->name('pendienteclientecompañia.formulario');
 
 Route::post('/agregarClienteCompañia', [persona_fisica_controller::class,"repartirClienteFisicoMoral"])->name('empleadoSeleccionarClienteCompañia.agregar');
 
@@ -45,8 +50,6 @@ Route::get('/seleccionarEmpleadooCompañia/{pkEmpleado}', [persona_fisica_contro
 
 
 Route::get('/detalleClientesSeleccionadosEmployeeX/{pkEmpleado}', [persona_fisica_controller::class,"compañiasYpersonasEmpleado"])->name('personaSeleccionarCompañiaCliente.detalle');
-
-
 
 
 
@@ -112,6 +115,20 @@ Route::get('/dashboardAdmin', [AsistenciaController::class, 'mostrarAsistencia']
 
 
 Route::post('/inicioSesion', [empleadOController::class, 'login'])->name('inicioSesion');
+
+
+Route::post('/agregarPendientesEmployee', [pendiente_controller::class,"agregarPendiente"])->name('pendienteEmpleado.agregar');
+Route::post('/agregarPendientesCostumer', [pendiente_controller::class,"agregarPendienteCliente"])->name('pendienteCliente.agregar');
+
+Route::post('/agregarPendientesCompany', [pendiente_controller::class,"agregarPendienteCompañia"])->name('pendienteCompañia.agregar');
+
+
+Route::get('/listaPendienteEmployee/{pkEmpleado}', [pendiente_controller::class,"listaPendientesEmpleadosPersonales"])->name('pendienteEmpleadoPersonal.mostrar');
+
+Route::get('/listaPendienteEmployeeGeneral', [pendiente_controller::class,"listaPendientesEmpleadosGeneral"])->name('pendienteEmpleadoHistorial.mostrar');
+
+
+Route::get('/agregarPendientesEmployee', [empleadoController::class,"formularioAgregarPendienteEmployees"])->name('pendienteEmpleado.agregar');
 Route::post('/aggNewEmployee', [empleadoController::class,"agregar"])->name('empleado.agregar');
 Route::get('/allEmployees', [empleadoController::class,"mostrarEmpleados"])->name('empleado.mostrar');
 Route::post('/updateEmployee', [empleadoController::class,"actualizar"])->name('empleado.actualizar');

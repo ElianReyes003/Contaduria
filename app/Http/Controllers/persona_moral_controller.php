@@ -232,9 +232,16 @@ function listaGenerarlPersonasMorales( ){
 
     $datoPersonaMoral=Compañia::join('domiciliocompañia', 'domiciliocompañia.fkCompañia', '=', 'compañia.pkCompañia')
     ->select('compañia.*', 'domiciliocompañia.*')->where('compañia.pkCompañia', '=', $pkCompañia)->first();
+
+
+    $datosPendientesCompañia =Compañia::join('compañiacliente', 'compañia.pkCompañia', '=', 'compañiacliente.fkCompañia')
+    ->join('pendientecompañia', 'pendientecompañia.fkCompañia', '=', 'compañia.pkCompañia')
+    ->select( 'pendientecompañia.*','compañia.*')
+    ->where('compañia.pkCompañia', '=', $pkCompañia) // Asegúrate de que 'fkCliente1' sea el nombre correcto de la columna
+    ->get();
     
 
-    return view($vista,compact("datoPersonaMoral"));
+    return view($vista,compact("datoPersonaMoral","datosPendientesCompañia"));
 
   }
 

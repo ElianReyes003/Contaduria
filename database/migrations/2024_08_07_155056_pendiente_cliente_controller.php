@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id('pkPendienteCliente')->autoIncrement();
             $table->text('tareaÇliente');
             $table->date('fechaPendienteCliente');
-            $table->unsignedBigInteger('fkClienteEmpleado');
-            $table->foreign("fkClienteEmpleado")->references("pkClienteEmpleado")->on("clienteEmpleado");
+            $table->unsignedBigInteger('fkEmpleadoRelacionCompañia');
+            $table->foreign("fkEmpleadoRelacionCompañia")->references("pkEmpleadoRelacionCompañia")->on("empleadorelacioncompañia")->nullable();
+            $table->unsignedBigInteger('fkEmpleadoRelacionCliente');
+            $table->foreign("fkEmpleadoRelacionCliente")->references("pkEmpleadoRelacionCliente")->on("empleadorelacioncliente")->nullable();
             $table->unsignedBigInteger('fkTipoPendienteCliente');
             $table->foreign("fkTipoPendienteCliente")->references("pkTipoPendienteCliente")->on("tipoPendienteCliente");
             $table->smallInteger("estatusPendienteCliente");

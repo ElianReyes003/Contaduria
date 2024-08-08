@@ -149,6 +149,16 @@ class empleadoController extends Controller
         return view($vista, compact("dato"));
     }
 
+
+    function formularioAgregarPendienteEmployees()
+    {
+        $datosEmpleados = Empleado::with('persona')->where('estatus', '1')->where('fkTipoEmpleado', '2')->get();
+        return view('agregarPendienteAEmpleado', compact("datosEmpleados"));
+    }
+
+
+
+
     public function actualizar(Request $req)
     {
         $empleado = Empleado::with('persona')->find($req->pkEmpleado);
