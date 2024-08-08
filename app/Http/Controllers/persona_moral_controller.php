@@ -10,6 +10,9 @@ use App\Models\Compañia;
 
 use App\Models\domicilioCompañia;
 
+use App\Models\pendienteCliente;
+
+
 class persona_moral_controller extends Controller
 {
 
@@ -234,14 +237,19 @@ function listaGenerarlPersonasMorales( ){
     ->select('compañia.*', 'domiciliocompañia.*')->where('compañia.pkCompañia', '=', $pkCompañia)->first();
 
 
-    $datosPendientesCompañia =Compañia::join('compañiacliente', 'compañia.pkCompañia', '=', 'compañiacliente.fkCompañia')
-    ->join('pendientecompañia', 'pendientecompañia.fkCompañia', '=', 'compañia.pkCompañia')
-    ->select( 'pendientecompañia.*','compañia.*')
+
+
+    $datosPendientesCompañia =pendienteCliente::join('empleadorelacioncompañia', 'pendientecliente.fkEmpleadoRelacionCompañia', '=', 'empleadorelacioncompañia.pkEmpleadoRelacionCompañia')
+    ->join('compañia', 'compañia.pkCompañia', '=', 'empleadorelacioncompañia.fkCompañia')
+    ->join('compañiacliente', 'compañiacliente.fkCompañia', '=', 'compañia.pkCompañia')
+    ->join('cliente', 'compañiacliente.fkCliente', '=', 'cliente.pkCliente')
+    ->join('tipopendientecliente', 'tipopendientecliente.pkTipoPendienteCliente', '=', 'pendientecliente.fkTipoPendienteCliente')
+    ->select( 'pendientecliente.*','compañia.*','tipopendientecliente.*')
     ->where('compañia.pkCompañia', '=', $pkCompañia) // Asegúrate de que 'fkCliente1' sea el nombre correcto de la columna
     ->get();
     
 
-    return view($vista,compact("datoPersonaMoral","datosPendientesCompañia"));
+    return view($vista,compact("datoPersonaMoral","datosPendientesCompañia","datosPendientesCompañia"));
 
   }
 
