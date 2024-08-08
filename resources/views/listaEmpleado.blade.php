@@ -51,6 +51,8 @@
             <h1>Empleados</h1>
         </div>
         <a href="{{ route('formEmpleado') }}">Agregar empleado +</a>
+
+        <a href="{{ route('pendienteEmpleado.agregar')}}">Asignar Pendiente +</a>
     </div>
 
     <table id="empleadosTable" class="display">
@@ -85,6 +87,11 @@
 
 
                                 <a href="{{ route('personaSeleccionarCompañiaCliente.detalle', [ 'pkEmpleado' => $empleado->pkEmpleado]) }}">Clientes y Compañias</a>
+
+
+                                <a href="{{ route('pendienteEmpleadoPersonal.mostrar', [ 'pkEmpleado' => $empleado->pkEmpleado]) }}">Pendientes Empleado</a>
+
+                            
 
 
                                 

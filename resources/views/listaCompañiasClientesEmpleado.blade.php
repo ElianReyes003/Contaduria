@@ -14,8 +14,12 @@
 
     <h2>Clientes Relacionados con {{$datoEmpleado->nombre .' '.$datoEmpleado->apellidoPaterno.' ' .$datoEmpleado->apellidoMaterno }}</h2>
 
+    <a href="{{ route('pendienteclientecompañia.formulario', [ 'pkEmpleado' => $datoEmpleado->pkEmpleado]) }}">Asignar Pendiente a Clientes +</a>
 
+    
+    <a href="{{ route('pendienteclientecompañiaespecifica.formulario', [ 'pkEmpleado' => $datoEmpleado->pkEmpleado]) }}">Asignar Pendiente a Compañia +</a>
 
+  
     
     <div class="flex justify-center md:justify-normal items-center mt-10">
                     <form class="w-[13rem] md:w-[30rem]">   

@@ -17,6 +17,7 @@ use App\Models\EmpleadoRelacionCliente;
 use App\Models\EmpleadoRelacionCompañia;
 
 use App\Models\documentosClientes;
+use App\Models\pendienteCliente;
 use Illuminate\Support\Facades\DB;
 
 class persona_fisica_controller extends Controller
@@ -425,6 +426,25 @@ class persona_fisica_controller extends Controller
         ->get();
     
 
+
+
+        $datosPendientesCompañia =pendienteCliente::join('empleadorelacioncompañia', 'pendientecliente.fkEmpleadoRelacionCompañia', '=', 'empleadorelacioncompañia.pkEmpleadoRelacionCompañia')
+        ->join('compañia', 'compañia.pkCompañia', '=', 'empleadorelacioncompañia.fkCompañia')
+        ->join('compañiacliente', 'compañiacliente.fkCompañia', '=', 'compañia.pkCompañia')
+        ->join('cliente', 'compañiacliente.fkCliente', '=', 'cliente.pkCliente')
+        ->select( 'pendientecliente.*','compañia.*')
+        ->where('compañiacliente.fkCliente', '=', $pkCliente) // Asegúrate de que 'fkCliente1' sea el nombre correcto de la columna
+        ->get();
+    
+
+        $datosPendientes = pendienteCliente::join('empleadorelacioncliente', 'pendientecliente.fkEmpleadoRelacionCliente', '=', 'empleadorelacioncliente.pkEmpleadoRelacionCliente')
+        ->join('cliente', 'cliente.pkCliente', '=', 'empleadorelacioncliente.fkCliente')
+        ->join('compañiacliente', 'compañiacliente.fkCliente', '=', 'cliente.pkCliente')
+        ->join('persona', 'persona.pkPersona', '=', 'cliente.fkPersona')
+        ->select('persona.*', 'cliente.*','pendientecliente.*')
+        ->where('empleadorelacioncliente.fkCliente', '=', $pkCliente) // Asegúrate de que 'fkCliente1' sea el nombre correcto de la columna
+        ->get();
+
     
     $datosCompañias = Compañia::join('compañiacliente', 'compañiacliente.fkCompañia', '=', 'compañia.pkCompañia')
     ->join('cliente', 'cliente.pkCliente', '=', 'compañiacliente.fkCliente')
@@ -447,17 +467,51 @@ class persona_fisica_controller extends Controller
         ->get();
      
 
-        return view($vista,compact("datoPersonaFisica","datoPersonaRelacionadas","datosCompañiasRelacionadas","datosPersonasFisicas","datosCompañias"));
+        return view($vista,compact("datoPersonaFisica","datoPersonaRelacionadas","datosCompañiasRelacionadas","datosPersonasFisicas","datosPendientes","datosPendientesCompañia","datosCompañias"));
       }
 
 
+      function PersonasFisicaEspecificaFormulario( $pkEmpleado){
+
+  
+     
+        $datosCompañias = Compañia::join('empleadorelacioncliente', 'empleadorelacioncliente.fkCliente', '=', 'cliente.pkCliente')
+        ->select(
+       
+            'cliente.*',
+        )
+        ->where('empleadorelacioncliente.fkEmpleado', '=', $pkEmpleado)
+        ->get();
+
+
+   
+    
+
+        return view("agregarPendienteACliente",compact("datoPersonaRelacionadas"));
+      }
+
+      function CompañiaEspecificaFormulario( $pkEmpleado){
+
+
+        $datosCompañias = Compañia::join('empleadorelacioncompañia', 'empleadorelacionCompañia.fkCompañia', '=', 'compañia.pkCompañia')
+        ->select(
+       
+            'compañia.*',
+        )
+        ->where('empleadorelacioncompañia.fkEmpleado', '=', $pkEmpleado)
+        ->get();
+
+        
+
+
+        return view("agregarPendienteAClienteCompañia",compact("datosCompañias"));
+      }
 
 
 
 
       
       function CompañiasyClientesElegir($pkEmpleado ){
-
 
 
 
@@ -483,7 +537,6 @@ class persona_fisica_controller extends Controller
       public function repartirClienteFisicoMoral(Request $req)
       {  
   
-        $persona = $req->input('pkPersona');
         $pkEmpleado = $req->input('pkEmpleado');
           $personaArray = $req->input('persona');
   
@@ -527,10 +580,6 @@ class persona_fisica_controller extends Controller
 
 
 
-
-
-
-      
       function compañiasYpersonasEmpleado( $pkEmpleado){
 
         
@@ -566,6 +615,31 @@ class persona_fisica_controller extends Controller
      
 
         return view("listaCompañiasClientesEmpleado",compact("datoPersonaRelacionadas","datosCompañiasRelacionadas","datoEmpleado"));
+      }
+
+
+
+
+
+
+
+      
+      function compañiasYpersonasEmpleadoFormulario( $pkEmpleado){
+
+        $datoPersonaRelacionadas = EmpleadoRelacionCliente::join('cliente', 'cliente.pkCliente', '=', 'empleadorelacioncliente.fkCliente')
+        ->join('persona', 'cliente.fkPersona', '=', 'persona.pkPersona')
+        ->join('empleado', 'empleado.pkEmpleado', '=', 'empleadorelacioncliente.fkEmpleado')
+        ->select(
+            'persona.*',
+            'cliente.*',
+            'empleado.*',
+            'empleadorelacioncliente.*'
+        )
+        ->where('empleadorelacioncliente.fkEmpleado', '=', $pkEmpleado)
+        ->get();
+
+
+        return view("agregarPendienteACliente",compact("datoPersonaRelacionadas","pkEmpleado"));
       }
 
 
