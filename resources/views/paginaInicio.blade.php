@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('img/logo.ico') }}" rel="icon" type="image/x-icon">
     <title>Dashboard (Administrador) | JP Despacho Contable</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    @include('alertas')
     <div>
         {{-- ICONO --}}
         <h1>Dashboard</h1>

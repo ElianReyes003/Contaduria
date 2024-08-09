@@ -422,7 +422,7 @@ class persona_fisica_controller extends Controller
         $datosPersonasFisicas = Persona::join('cliente', 'cliente.fkPersona', '=', 'persona.pkPersona')
         ->select('persona.*', 'cliente.*')
         ->where('cliente.estatusCliente', '=', '1')
-        ->where('cliente.pkCliente', '!=', $pkCliente) // Asegúrate de que 'fkCliente1' sea el nombre correcto de la columna
+        ->where('cliente.pkCliente', '!=', $pkCliente) 
         ->get();
     
 
