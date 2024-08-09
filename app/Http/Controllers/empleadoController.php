@@ -159,6 +159,12 @@ class empleadoController extends Controller
 
 
 
+
+    
+
+
+
+
     public function actualizar(Request $req)
     {
         $empleado = Empleado::with('persona')->find($req->pkEmpleado);
