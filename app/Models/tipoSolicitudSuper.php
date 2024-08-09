@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class tipoSolicitudSuper extends Model
 {
     use HasFactory;
-    protected $table="tiposolicitud";
+    protected $table="tiposolicitudsuper";
     //si mi id se hubiera llamado diferente
-    protected $primaryKey='pkTipoSolicitud';
+    protected $primaryKey='pkTipoSolicitudSuper';
     public $timestamps=false;
 }

@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id('pkAsistencia')->autoIncrement();
             $table->date('fechaAsistencia',90);
             $table->time('horaInicio');
-            $table->time('horaFinal');
+            $table->time('horaFinal')->nullable(); 
             $table->unsignedBigInteger('fkEmpleado');
             $table->foreign("fkEmpleado")->references("pkEmpleado")->on("empleado");
-            $table->smallInteger("estatus");
+            $table->smallInteger("estatusAsistencia");
             $table->timestamps();
     
          });
