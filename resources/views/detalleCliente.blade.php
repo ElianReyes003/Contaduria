@@ -287,7 +287,7 @@
     <div class="bg-white rounded-lg shadow-lg mt-10">
         <div class="flex justify-center mb-[1rem]">
             <div class="">
-                <h1 class="text-center font-bold text-2xl mt-5">Selecciona persona</h1>
+                <h1 class="text-center font-bold text-2xl mt-5">Pendientes Compañias</h1>
             </div>
         </div>
 

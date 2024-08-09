@@ -7,6 +7,7 @@ use App\Http\Controllers\persona_moral_controller;
 use App\Http\Controllers\pendiente_controller;
 use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\solicitud_controller;
+use App\Http\Controllers\documento_controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,8 @@ Route::post('/aggPeticion', [solicitud_controller::class,"crearSolicitud"])->nam
 
 
 Route::get('/generalListQueriesEmployees', [solicitud_controller::class,"listaGeneralPeticiones"])->name('solicitud.historial');
+
+Route::get('/generalListDocumentsEmployees', [documento_controller::class,"listaGeneralDocumentos"])->name('documento.historial');
 
 
 
