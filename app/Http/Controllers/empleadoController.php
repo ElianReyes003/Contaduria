@@ -45,10 +45,10 @@ class empleadoController extends Controller
             }
 
             if ($empleado->fkTipoEmpleado == 1) {
-                return redirect()->to('/dashboardAdmin')->with('success', '¡Bienvenido(a)!');
+                return redirect()->to('/dashboardAdmin')->with('success', '¡Bienvenido, Administrador!👋');
             }
             if ($empleado->fkTipoEmpleado == 2) {
-                return redirect()->to('/dashboardEmpleado')->with('success', 'Bienvenido(a)');
+                return redirect()->to('/dashboardEmpleado')->with('success', '¡Bienvenido(a), ' . session('nombre') . '!👋');
             }
         } elseif ($cliente) {
             session([
@@ -58,7 +58,7 @@ class empleadoController extends Controller
                 'tipo' => 3
             ]);
             return redirect()->route('clienteFisico.detalle', ['pkCliente' => session('id')])
-            ->with('success', 'Bienvenido(a) Cliente');
+            ->with('success', '¡Bienvenido(a), ' . session('nombre') . '!👋');
 
         } else {
             return redirect(url('/'))->with('credentials', 'Credenciales incorrectas');
