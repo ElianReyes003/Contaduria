@@ -12,6 +12,7 @@ use App\Models\clienteClientes;
 use App\Models\ClienteCompañia;
 use App\Models\Domicilio;
 use App\Models\Empleado;
+use App\Models\Factura;
 
 use App\Models\EmpleadoRelacionCliente;
 use App\Models\EmpleadoRelacionCompañia;
@@ -253,6 +254,21 @@ class persona_fisica_controller extends Controller
          $factura->estatusProceso=1;
          $factura->estatusDocumentoCliente=1;
          $factura->save();
+
+         $facturaDocumento = new Factura();
+        
+
+         $cantidadDigitos = 6; // Cantidad de dígitos que deseas tener en total (incluyendo el pkCompra)
+         $codigoFolio = str_pad($factura->pkFactura, $cantidadDigitos, '0', STR_PAD_LEFT);
+         $facturaDocumento->serie =$req->serie;
+         $facturaDocumento->folio = $codigoFolio ;
+         $facturaDocumento->totalFactura = $req->totalFactura;
+         $facturaDocumento->fkTipoCambio=$req->fkTipoCambio;
+         $facturaDocumento->fkMoneda=$req->fkMoneda;
+         $facturaDocumento->fkDocumentoCliente=$factura->pkDocumentosCliente;
+         $facturaDocumento->estatusFacturas=1;
+     
+         $facturaDocumento->save();
 
 
         $estadoDeCuenta = new documentosClientes();
@@ -580,9 +596,31 @@ class persona_fisica_controller extends Controller
         )
         ->where('compañiacliente.fkCliente', '=', $pkCliente)
         ->get();
+
+
+
+        $todosDocumentos = documentosClientes::leftJoin('cliente', 'cliente.pkCliente', '=', 'documentoscliente.fkCliente')
+        ->leftJoin('compañia', 'compañia.pkCompañia', '=', 'documentoscliente.fkCompañia')
+        ->leftJoin('persona', 'persona.pkPersona', '=', 'cliente.fkPersona')
+        ->leftJoin('tipodocumento', 'documentoscliente.fkTipoDocumento', '=', 'tipodocumento.pkTipoDocumento')
+        ->select(
+            'cliente.*', 
+            'compañia.*', 
+            'documentoscliente.*',
+            'tipodocumento.*',
+            'persona.*'
+        )
+        ->where('cliente.pkCliente', '=', $pkCliente)
+        ->get();
+
+    
+
+
+
+    
      
 
-        return view($vista,compact("datoPersonaFisica","datoPersonaRelacionadas","datosCompañiasRelacionadas","datosPersonasFisicas","datosPendientes","datosPendientesCompañia","datosCompañias"));
+        return view($vista,compact("datoPersonaFisica","datoPersonaRelacionadas","datosCompañiasRelacionadas","datosPersonasFisicas","datosPendientes","datosPendientesCompañia","datosCompañias","todosDocumentos"));
       }
 
 

@@ -54,6 +54,44 @@
         <input type="date" name="fechaExpedicionVencimientoFactura">
 
 
+
+          <!-- BRO PON IF  Si es tipo factura que active esto -->
+
+          <label for="">Serie</label>
+                <input type="text" name="serie" id="totalFactura"
+                        class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5"
+                        >
+                <label for="">Total Factura</label>
+                <input type="number" name="totalFactura" id="totalFactura"
+                        class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5"
+                        >
+                <label for="estatusPatron" class="block mb-2 text-sm font-medium text-gray-900">Tipo Moneda</label>
+                        <select name="fkMoneda"  id="fkTipoDocumento" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5">
+                        @php
+                        use App\Models\Moneda;
+                        $datosMoneda = Moneda::get();
+                        @endphp
+                        <option value="">Seleccion un tipo pendiente</option>
+                            @foreach (  $datosMoneda as $dato)
+                                <option value="{{$dato->pkMoneda}}">{{$dato->nombreMoneda}}</option>
+                            @endforeach
+				</select>
+
+
+                <label for="estatusPatron" class="block mb-2 text-sm font-medium text-gray-900">Tipo Cambio</label>
+                        <select name="fkTipoCambio"  id="fkTipoCambio" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5">
+                        @php
+                        use App\Models\tipoCambio;
+                        $datosCambio = tipoCambio::get();
+                        @endphp
+                        <option value="">Seleccion un tipo pendiente</option>
+                            @foreach (  $datosCambio as $dato)
+                                <option value="{{$dato->pkTipoCambio}}">{{$dato->nombreTipoCambio}}</option>
+                            @endforeach
+				</select>
+
+
+
         <label for="">Estado de cuenta</label>
 
         <input type="file" name="estadoCuenta">

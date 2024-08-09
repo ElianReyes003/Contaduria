@@ -22,10 +22,10 @@
 
     </div>
 
-    <form id="formulario" action="{{ route('documentoCliente.agregar') }}" enctype="multipart/form-data" method="POST">
+    <form id="formulario" action="{{ route('documentoCompañia.agregar') }}" enctype="multipart/form-data" method="POST">
         @csrf
         
-               <input type="hidden"  value="{{$pkCliente}}" name="pkCliente">
+               <input type="hidden"  value="{{$pkCompañia}}" name="pkCompañia">
                 
                 <div class="flex justify-center mt-5 md:mt-10">
                     <h1 class="text-center font-bold text-2xl">Datos personales</h1>
@@ -67,10 +67,10 @@
                         >
                 </div>
 
+                
+                <!-- BRO PON IF  Si es tipo factura que active esto -->
 
-                 <!-- BRO PON IF  Si es tipo factura que active esto -->
-
-                 <label for="">Serie</label>
+                <label for="">Serie</label>
                 <input type="text" name="serie" id="totalFactura"
                         class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5"
                         >
@@ -78,7 +78,7 @@
                 <input type="number" name="totalFactura" id="totalFactura"
                         class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5"
                         >
-                <label for="estatusPatron" class="block mb-2 text-sm font-medium text-gray-900">Tipo Moneda</label>
+                <label for="estatusPatron" class="block mb-2 text-sm font-medium text-gray-900">Tipo Documento</label>
                         <select name="fkMoneda"  id="fkTipoDocumento" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5">
                         @php
                         use App\Models\Moneda;
@@ -91,7 +91,7 @@
 				</select>
 
 
-                <label for="estatusPatron" class="block mb-2 text-sm font-medium text-gray-900">Tipo Cambio</label>
+                <label for="estatusPatron" class="block mb-2 text-sm font-medium text-gray-900">Tipo Documento</label>
                         <select name="fkTipoCambio"  id="fkTipoCambio" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5">
                         @php
                         use App\Models\tipoCambio;

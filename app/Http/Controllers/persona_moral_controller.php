@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 
 use App\Models\Compañia;
+use App\Models\Factura;
 
 use App\Models\domicilioCompañia;
 
@@ -101,6 +102,22 @@ class persona_moral_controller extends Controller
       $factura->estatusProceso=1;
       $factura->estatusDocumentoCliente=1;
       $factura->save();
+
+
+      $facturaDocumento = new Factura();
+        
+
+      $cantidadDigitos = 6; // Cantidad de dígitos que deseas tener en total (incluyendo el pkCompra)
+      $codigoFolio = str_pad($factura->pkFactura, $cantidadDigitos, '0', STR_PAD_LEFT);
+      $facturaDocumento->serie =$req->serie;
+      $facturaDocumento->folio = $codigoFolio ;
+      $facturaDocumento->totalFactura = $req->totalFactura;
+      $facturaDocumento->fkTipoCambio=$req->fkTipoCambio;
+      $facturaDocumento->fkMoneda=$req->fkMoneda;
+      $facturaDocumento->fkDocumentoCliente=$factura->pkDocumentosCliente;
+      $facturaDocumento->estatusFacturas=1;
+  
+      $facturaDocumento->save();
 
 
      $estadoDeCuenta = new documentosClientes();
@@ -252,7 +269,22 @@ function listaGenerarlPersonasMorales( ){
     ->get();
     
 
-    return view($vista,compact("datoPersonaMoral","datosPendientesCompañia","datosPendientesCompañia"));
+    
+    $todosDocumentos = documentosClientes::leftJoin('cliente', 'cliente.pkCliente', '=', 'documentoscliente.fkCliente')
+    ->leftJoin('compañia', 'compañia.pkCompañia', '=', 'documentoscliente.fkCompañia')
+    ->leftJoin('persona', 'persona.pkPersona', '=', 'cliente.fkPersona')
+    ->leftJoin('tipodocumento', 'documentoscliente.fkTipoDocumento', '=', 'tipodocumento.pkTipoDocumento')
+    ->select(
+        'cliente.*', 
+        'compañia.*', 
+        'documentoscliente.*',
+        'tipodocumento.*',
+        'persona.*'
+    )
+    ->where('compañia.pkCompañia', '=', $pkCompañia)
+    ->get();
+
+    return view($vista,compact("datoPersonaMoral","datosPendientesCompañia","datosPendientesCompañia","todosDocumentos"));
 
   }
 

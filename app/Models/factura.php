@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class factura extends Model
 {
     use HasFactory;
-    protected $table="facturacliente";
+    protected $table="facturascliente";
     //si mi id se hubiera llamado diferente
-    protected $primaryKey='pkFacturaCliente';
+    protected $primaryKey='pkFacturasCliente';
     public $timestamps=false;
 }

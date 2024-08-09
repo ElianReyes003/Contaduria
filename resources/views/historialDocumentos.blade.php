@@ -57,7 +57,7 @@
                 </div>
 
 
-    <h2>Pendientes Compañia</h2>
+    <h2>Compañia</h2>
     <div class="flex justify-center md:justify-normal items-center mt-10">
         <form class="w-[13rem] md:w-[30rem]">
             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
@@ -223,8 +223,8 @@ $('#fkTipoDocumento, #dia,#estatusDocumentoCliente, #mes').change(function () {
        
     });
 
-    $('#busqueda2').on('keyup', function (e) {
-        var filtroBusqueda = $('#busqueda2').val();
+    $('#busqueda').on('keyup', function (e) {
+        var filtroBusqueda = $('#busqueda').val();
         tableDocumentos.search(filtroBusqueda).draw();
     });
 

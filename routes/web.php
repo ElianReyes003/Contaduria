@@ -40,7 +40,21 @@ Route::post('/aggPeticion', [solicitud_controller::class,"crearSolicitud"])->nam
 
 Route::get('/generalListQueriesEmployees', [solicitud_controller::class,"listaGeneralPeticiones"])->name('solicitud.historial');
 
-Route::get('/generalListDocumentsEmployees', [documento_controller::class,"listaGeneralDocumentos"])->name('documento.historial');
+Route::get('/formularioAgregarDocumentosCliente/{pkCliente}', [documento_controller::class,"formularioAgregarArchivo"])->name('documento.formulario');
+Route::get('/formularioAgregarDocumentosCompañia/{pkCompañia}', [documento_controller::class,"formularioAgregarArchivoCompañia"])->name('documentoCompañia.formulario');
+
+
+
+Route::post('/agregarDocumentoCliente', [documento_controller::class,"agregarDocumentoCliente"])->name('documentoCliente.agregar');
+
+Route::post('/agregarDocumentoCompañia', [documento_controller::class,"agregarDocumentoCompañia"])->name('documentoCompañia.agregar');
+
+
+
+
+Route::get('/historialCompletoDocumentos', [documento_controller::class,"listaGeneralDocumentos"])->name('documentoCliente.historial');
+
+
 
 
 
@@ -70,7 +84,7 @@ Route::post('/aggCostumers', [persona_fisica_controller::class,"agregarClienteFi
 Route::post('/aggCompanies', [persona_moral_controller::class,"agregarClienteMoral"])->name('compañia.insertar');
 
 
-Route::get('/detallePersonaMoral/{pkCompañia}/{vista}', [persona_moral_controller::class,"PersonasMoralEspecifica"])->name('personaMoral.detalle');
+Route::get('/detallePersonaMoral/{pkCompañia}/{vista?}', [persona_moral_controller::class,"PersonasMoralEspecifica"])->name('personaMoral.detalle');
 
 Route::get('/seleccionarEmpleadooCompañia/{pkEmpleado}', [persona_fisica_controller::class,"CompañiasyClientesElegir"])->name('personaSeleccionarCompañiaCliente.select');
 
