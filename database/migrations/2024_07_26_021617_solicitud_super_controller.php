@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('solicitudSuper', function (Blueprint $table) {
             $table->id('pkSolicitudSuper')->autoIncrement();
+            $table->text('tituloSolicitud');
             $table->date('fechaSolicitudSuper');
             $table->unsignedBigInteger('fkEmpleado');
             $table->foreign("fkEmpleado")->references("pkEmpleado")->on("empleado");
+            $table->unsignedBigInteger('fkCliente');
+            $table->foreign("fkCliente")->references("pkCliente")->on("cliente");
+            $table->unsignedBigInteger('fkCompañia');
+            $table->foreign("fkCompañia")->references("pkCompañia")->on("compañia");
             $table->unsignedBigInteger('fkTipoSolicitudSuper');
             $table->foreign("fkTipoSolicitudSuper")->references("pkTipoSolicitudSuper")->on("tipoSolicitudSuper");
             $table->smallInteger("estatusSolicitudSuper");

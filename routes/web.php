@@ -6,6 +6,7 @@ use App\Http\Controllers\persona_fisica_controller;
 use App\Http\Controllers\persona_moral_controller;
 use App\Http\Controllers\pendiente_controller;
 use App\Http\Controllers\AsistenciaController;
+use App\Http\Controllers\solicitud_controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,22 @@ Route::get('/aggCostumerMoral', function () {
 });
 
 
+Route::get('/aggDocumentsForm', function () {
+    return view('agregaDocumentosClientes');
+});
+
+Route::post('/aggPeticion', [solicitud_controller::class,"crearSolicitud"])->name('solicitud.insertar');
+
+
+Route::get('/generalListQueriesEmployees', [solicitud_controller::class,"listaGeneralPeticiones"])->name('solicitud.historial');
+
+
+
+
+
+
+
+
 Route::get('/formularioPendienteCompañia/{pkEmpleado}', [persona_fisica_controller::class,"CompañiaEspecificaFormulario"])->name('pendienteclientecompañiaespecifica.formulario');
 
 
@@ -36,7 +53,13 @@ Route::get('/formularioPendienteClienteCompañia/{pkEmpleado}', [persona_fisica_
 
 Route::post('/agregarClienteCompañia', [persona_fisica_controller::class,"repartirClienteFisicoMoral"])->name('empleadoSeleccionarClienteCompañia.agregar');
 
+
+
+
 Route::get('/FormAggPhisicalCostumer', [persona_fisica_controller::class,"mostrarPersonasFisicasGeneral"])->name('clienteSeleccionar.mostrar');
+
+
+Route::post('/aggDocuments', [persona_fisica_controller::class,"AgregarDocumentosCliente"])->name('clientesDocumentos.subir');
 
 Route::post('/aggCostumers', [persona_fisica_controller::class,"agregarClienteFisico"])->name('cliente.insertar');
 
@@ -49,7 +72,7 @@ Route::get('/detallePersonaMoral/{pkCompañia}/{vista}', [persona_moral_controll
 Route::get('/seleccionarEmpleadooCompañia/{pkEmpleado}', [persona_fisica_controller::class,"CompañiasyClientesElegir"])->name('personaSeleccionarCompañiaCliente.select');
 
 
-Route::get('/detalleClientesSeleccionadosEmployeeX/{pkEmpleado}', [persona_fisica_controller::class,"compañiasYpersonasEmpleado"])->name('personaSeleccionarCompañiaCliente.detalle');
+Route::get('/detalleClientesSeleccionadosEmployeeX/{pkEmpleado}/{vista?}', [persona_fisica_controller::class,"compañiasYpersonasEmpleado"])->name('personaSeleccionarCompañiaCliente.detalle');
 
 
 

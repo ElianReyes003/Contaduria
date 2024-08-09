@@ -24,6 +24,66 @@
 
     <form id="formulario" action="{{ route('compañia.insertar') }}" enctype="multipart/form-data" method="post">
     @csrf
+
+
+    <h2>Sube los archivos (si es necesario)</h2>
+        <label for="">firma electronica</label>
+
+      <input type="file" name="firmaElectronica">
+      <h3>Fecha Expedicion firma</h3>
+      <input type="date" name="fechaExpedicionFirma">
+      <h3>Fecha Vencimiento firma</h3>
+      <input type="date" name="fechaExpedicionVencimientoFirma">
+
+
+      <label for="">Carga Factura</label>
+
+      <input type="file" name="factura">
+      <h3>Fecha Expedicion Factura</h3>
+      <input type="date" name="fechaExpedicionFactura">
+      <h3>Fecha Vencimiento Factura</h3>
+      <input type="date" name="fechaExpedicionVencimientoFactura">
+
+
+      <label for="">Carga Factura</label>
+
+        <input type="file" name="factura">
+        <h3>Fecha Expedicion Factura</h3>
+        <input type="date" name="fechaExpedicionFactura">
+        <h3>Fecha Vencimiento Factura</h3>
+        <input type="date" name="fechaExpedicionVencimientoFactura">
+
+
+        <label for="">Estado de cuenta</label>
+
+        <input type="file" name="estadoCuenta">
+        <h3>Fecha Expedicion Estado de Cuenta</h3>
+        <input type="date" name="fechaExpedicionEstadoCuenta">
+        <h3>Fecha Vencimiento Estado de Cuenta</h3>
+        <input type="date" name="fechaVencimientoEstadoCuenta">
+
+
+
+        <label for="">Papeles de trabajo</label>
+
+        <input type="file" name="papelesDeTrabajo">
+        <h3>Fecha Expedicion Estado de Cuenta</h3>
+        <input type="date" name="fechaExpedicionPapelesTrabajo">
+        <h3>Fecha Vencimiento Estado de Cuenta</h3>
+        <input type="date" name="fechaVencimientoPapelesTrabajo">
+
+        <label for="">Subir Archivos Extras</label>
+
+        <input type="file" name="documentos[]"  multiple>
+
+
+
+
+
+
+
+
+
     <div class="p-4 sm:ml-64 mt-16 md:mt-10">
         <!-- Guias del tamaño del contenedor -->
         <div class="p-4">
@@ -124,75 +184,6 @@
         </div>
     </div>
 
-
-<div class="flex justify-center mt-5 md:mt-10">
-    <h1 class="text-center font-bold text-2xl">Datos personales</h1>
-</div>
-
-
-    <label class="block mb-2 text-sm font-medium text-gray-900" for="firmaElectronica">Carga Firma-E</label>
-    <input name="firmaElectronica" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-green-50 focus:outline-none" aria-describedby="file_input_help" id="firmaElectronica" type="file">
-
-
-<div>
-    <label for="fechaExpedicionFirma" class="block mb-2 text-sm font-medium text-gray-900">Fecha de Expedición</label>
-    <input type="date" name="fechaExpedicionFirma" id="fechaExpedicionFirma" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" >
-</div>
-
-<div>
-    <label for="fechaVencimientoFirma" class="block mb-2 text-sm font-medium text-gray-900">Fecha de Vencimiento</label>
-    <input type="date" name="fechaVencimientoFirma" id="fechaVencimientoFirma" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" >
-</div>
-
-<div>
-    <label class="block mb-2 text-sm font-medium text-gray-900" for="factura">Carga Factura</label>
-    <input name="factura" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-green-50 focus:outline-none" aria-describedby="file_input_help" id="factura" type="file">
-</div>
-
-<div>
-    <label for="fechaExpedicionFactura" class="block mb-2 text-sm font-medium text-gray-900">Fecha de Expedición</label>
-    <input type="date" name="fechaExpedicionFactura" id="fechaExpedicionFactura" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" >
-</div>
-
-<div>
-    <label for="fechaVencimientoFactura" class="block mb-2 text-sm font-medium text-gray-900">Fecha de Vencimiento</label>
-    <input type="date" name="fechaVencimientoFactura" id="fechaVencimientoFactura" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" >
-</div>
-
-<div>
-    <label class="block mb-2 text-sm font-medium text-gray-900" for="estadoCuenta">Estado de cuenta</label>
-    <input name="estadoCuenta" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-green-50 focus:outline-none" aria-describedby="file_input_help" id="estadoCuenta" type="file">
-</div>
-
-<div>
-    <label for="fechaExpedicionEstadoCuenta" class="block mb-2 text-sm font-medium text-gray-900">Fecha de Expedición</label>
-    <input type="date" name="fechaExpedicionEstadoCuenta" id="fechaExpedicionEstadoCuenta" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" >
-</div>
-
-<div>
-    <label for="fechaVencimientoEstadoCuenta" class="block mb-2 text-sm font-medium text-gray-900">Fecha de Vencimiento</label>
-    <input type="date" name="fechaVencimientoEstadoCuenta" id="fechaVencimientoEstadoCuenta" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" >
-</div>
-
-<div>
-    <label class="block mb-2 text-sm font-medium text-gray-900" for="papelesDeTrabajo">Papeles de trabajo</label>
-    <input name="papelesDeTrabajo" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-green-50 focus:outline-none" aria-describedby="file_input_help" id="papelesDeTrabajo" type="file">
-</div>
-
-<div>
-    <label for="fechaExpedicionPapelesTrabajo" class="block mb-2 text-sm font-medium text-gray-900">Fecha de Expedición</label>
-    <input type="date" name="fechaExpedicionPapelesTrabajo" id="fechaExpedicionPapelesTrabajo" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" >
-</div>
-
-<div>
-    <label for="fechaVencimientoPapelesTrabajo" class="block mb-2 text-sm font-medium text-gray-900">Fecha de Vencimiento</label>
-    <input type="date" name="fechaVencimientoPapelesTrabajo" id="fechaVencimientoPapelesTrabajo" class="bg-green-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5" >
-</div>
-
-<div>
-    <label class="block mb-2 text-sm font-medium text-gray-900" for="documentos">Subir Archivos Extras</label>
-    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-green-50 focus:outline-none" aria-describedby="file_input_help" type="file" id="documentos" name="documentos[]" multiple>
-</div>
 
 
         <input type="hidden" name="persona[]" value="">

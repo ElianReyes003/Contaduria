@@ -19,6 +19,8 @@
     
     <a href="{{ route('pendienteclientecompañiaespecifica.formulario', [ 'pkEmpleado' => $datoEmpleado->pkEmpleado]) }}">Asignar Pendiente a Compañia +</a>
 
+    <a href="{{ route('personaSeleccionarCompañiaCliente.detalle', ['pkEmpleado' => $datoEmpleado->pkEmpleado, 'vista' => 'formPeticionCompañiaCliente']) }}">Agregar petición+</a>
+
   
     
     <div class="flex justify-center md:justify-normal items-center mt-10">

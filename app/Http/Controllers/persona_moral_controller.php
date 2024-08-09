@@ -10,6 +10,10 @@ use App\Models\Compañia;
 
 use App\Models\domicilioCompañia;
 
+
+
+
+use App\Models\documentosClientes;
 use App\Models\pendienteCliente;
 
 
@@ -55,98 +59,97 @@ class persona_moral_controller extends Controller
         $domicilio->estatusDomicilioCompañia= 1;
         $domicilio->save();
 
-        /*
+     // Recibe el archivo de firma electrónica desde la solicitud
+     $firmaElectronicaFile = $req->file('firmaElectronica');
 
-        // Recibe el archivo de firma electrónica desde la solicitud
-        $firmaElectronicaFile = $req->file('firmaElectronica');
-
-        // Crea una nueva instancia de documentosClientes
-        $firmaElectronica = new documentosClientes();
-        
-        // Almacena el nombre original del archivo
-        $firmaElectronica->documentoCliente = $firmaElectronicaFile->getClientOriginalName();
-        
-        // Almacena las fechas de expedición y vencimiento
-        $firmaElectronica->fechaExpedicion = $req->fechaExpedicionFirma;
-        $firmaElectronica->fechaVencimiento = $req->fechaVencimientoFirma;
-        
-        // Almacena el archivo en la carpeta 'public' y guarda la ruta
-        $ruta = $firmaElectronicaFile->store('public');
-        $firmaElectronica->rutaDccumentoCliente = $ruta;
-        
-        // Asigna las claves foráneas y otros atributos
-        $firmaElectronica->fkCliente = $cliente->pkCliente;
-        $firmaElectronica->fkTipoDocumento = 1; // Asegúrate de que el tipo de documento sea correcto
-        $firmaElectronica->estatusProceso = 1;
-        $firmaElectronica->estatusDocumentoCliente = 1;
-        
-        // Guarda el objeto en la base de datos
-        $firmaElectronica->save();
-
-*/
-/*
-        $factura = new documentosClientes();
-
-
-        $facturaName=$req->file('factura') ;
-         $factura->documentoCliente=   $facturaName->getClientOriginalName();
-         $factura->fechaExpedicion= $req->fechaExpedicionFirma;
-         $factura->fechaVencimiento= $req->fechaVencimientoFirma;
-        $ruta =$facturaName->store('public');
-         $factura->rutaDccumentoCliente=$ruta;
-         $factura->fkCliente=$cliente->pkCliente;
-         $factura->fkTipoDocumento=2;
-         $factura->estatusProceso=1;
-         $factura->estatusDocumentoCliente=1;
-         $factura->save();
-
-
-        $estadoDeCuenta = new documentosClientes();
-
-
-        $estadoDeCuentaName=$req->file('estadoCuenta') ;
-        $estadoDeCuenta ->documentoCliente=   $estadoDeCuentaName->getClientOriginalName();
-        $estadoDeCuenta ->fechaExpedicion= $req->fechaExpedicionFirma;
-        $estadoDeCuenta ->fechaVencimiento= $req->fechaVencimientoFirma;
-       $ruta =$estadoDeCuentaName->store('public');
-        $estadoDeCuenta ->rutaDccumentoCliente=$ruta;
-        $estadoDeCuenta ->fkCliente=$cliente->pkCliente;
-        $estadoDeCuenta ->fkTipoDocumento=3;
-        $estadoDeCuenta ->estatusProceso=1;
-        $estadoDeCuenta ->estatusDocumentoCliente=1;
-        $estadoDeCuenta ->save();
-
-
-        $papelesDeTrabajo = new documentosClientes();
-
-        $papelesDeTrabajoName=$req->file('papelesDeTrabajo') ;
-         $papelesDeTrabajo ->documentoCliente=    $papelesDeTrabajoName->getClientOriginalName();
-         $papelesDeTrabajo ->fechaExpedicion= $req->fechaExpedicionFirma;
-         $papelesDeTrabajo ->fechaVencimiento= $req->fechaVencimientoFirma;
-        $ruta = $papelesDeTrabajoName->store('public');
-         $papelesDeTrabajo ->rutaDccumentoCliente=$ruta;
-         $papelesDeTrabajo ->fkCliente=$cliente->pkCliente;
-         $papelesDeTrabajo ->fkTipoDocumento=4;
-         $papelesDeTrabajo ->estatusProceso=1;
-         $papelesDeTrabajo ->estatusDocumentoCliente=1;
-         $papelesDeTrabajo ->save();
+     // Crea una nueva instancia de documentosClientes
+     $firmaElectronica = new documentosClientes();
+     
+     // Almacena el nombre original del archivo
+     $firmaElectronica->documentoCliente = $firmaElectronicaFile->getClientOriginalName();
+     
+     // Almacena las fechas de expedición y vencimiento
+     $firmaElectronica->fechaExpedicion = $req->fechaExpedicionFirma;
+     $firmaElectronica->fechaVencimiento = $req->fechaExpedicionVencimientoFirma;
+     
+     // Almacena el archivo en la carpeta 'public' y guarda la ruta
+     $ruta = $firmaElectronicaFile->store('public');
+     $firmaElectronica->rutaDocumentoCliente = $ruta;
+     
+     // Asigna las claves foráneas y otros atributos
+     $firmaElectronica->fkCompañia = $compañia->pkCompañia;
+     $firmaElectronica->fkTipoDocumento = 1; // Asegúrate de que el tipo de documento sea correcto
+     $firmaElectronica->estatusProceso = 1;
+     $firmaElectronica->estatusDocumentoCliente = 1;
+     
+     // Guarda el objeto en la base de datos
+     $firmaElectronica->save();
 
 
 
-        if ($req->hasFile('documentos')) {
-            foreach ($req->file('documentos') as $documento) {
-                $nombreDocumento = $documento->getClientOriginalName();
-                $ruta = $documento->store('public');// Crear un nuevo documento asociado al cliente
-                $nuevoDocumento = new documentosClientes();
-                $nuevoDocumento->documentoCliente = $nombreDocumento;
-                $nuevoDocumento->fkTipoDocumento=5; 
-                $nuevoDocumento ->estatusProceso=1;
-                $nuevoDocumento ->estatusDocumentoCliente=1;// Asegúrate de tener el nombre correcto del campo
-                $nuevoDocumento->save();
-            }
-        }
+     $factura = new documentosClientes();
 
-        */
+
+     $facturaName=$req->file('factura') ;
+      $factura->documentoCliente=   $facturaName->getClientOriginalName();
+      $factura->fechaExpedicion= $req->fechaExpedicionFactura;
+      $factura->fechaVencimiento= $req->fechaExpedicionVencimientoFactura;
+     $ruta =$facturaName->store('public');
+      $factura->rutaDocumentoCliente=$ruta;
+      $factura->fkCompañia = $compañia->pkCompañia;
+      $factura->fkTipoDocumento=2;
+      $factura->estatusProceso=1;
+      $factura->estatusDocumentoCliente=1;
+      $factura->save();
+
+
+     $estadoDeCuenta = new documentosClientes();
+
+
+     $estadoDeCuentaName=$req->file('estadoCuenta') ;
+     $estadoDeCuenta ->documentoCliente=   $estadoDeCuentaName->getClientOriginalName();
+     $estadoDeCuenta ->fechaExpedicion= $req->fechaExpedicionEstadoCuenta;
+     $estadoDeCuenta ->fechaVencimiento= $req->fechaVencimientoEstadoCuenta;
+    $ruta =$estadoDeCuentaName->store('public');
+     $estadoDeCuenta ->rutaDocumentoCliente=$ruta;
+     $estadoDeCuenta ->fkCompañia = $compañia->pkCompañia;
+     $estadoDeCuenta ->fkTipoDocumento=3;
+     $estadoDeCuenta ->estatusProceso=1;
+     $estadoDeCuenta ->estatusDocumentoCliente=1;
+     $estadoDeCuenta ->save();
+
+
+     $papelesDeTrabajo = new documentosClientes();
+
+     $papelesDeTrabajoName=$req->file('papelesDeTrabajo') ;
+      $papelesDeTrabajo ->documentoCliente=    $papelesDeTrabajoName->getClientOriginalName();
+      $papelesDeTrabajo ->fechaExpedicion= $req->fechaExpedicionPapelesTrabajo;
+      $papelesDeTrabajo ->fechaVencimiento= $req->fechaVencimientoPapelesTrabajo;
+     $ruta = $papelesDeTrabajoName->store('public');
+      $papelesDeTrabajo ->rutaDocumentoCliente=$ruta;
+      $papelesDeTrabajo ->fkCompañia = $compañia->pkCompañia;
+      $papelesDeTrabajo ->fkTipoDocumento=4;
+      $papelesDeTrabajo ->estatusProceso=1;
+      $papelesDeTrabajo ->estatusDocumentoCliente=1;
+      $papelesDeTrabajo ->save();
+
+
+
+     if ($req->hasFile('documentos')) {
+         foreach ($req->file('documentos') as $documento) {
+             $nombreDocumento = $documento->getClientOriginalName();
+             $ruta = $documento->store('public');// Crear un nuevo documento asociado al cliente
+             $nuevoDocumento = new documentosClientes();
+             $nuevoDocumento->documentoCliente = $nombreDocumento;
+             $nuevoDocumento ->fechaExpedicion= now();
+             $nuevoDocumento->fkTipoDocumento=5;
+             $nuevoDocumento ->rutaDocumentoCliente=$ruta;
+             $nuevoDocumento ->fkCompañia = $compañia->pkCompañia;
+             $nuevoDocumento ->estatusProceso=1;
+             $nuevoDocumento ->estatusDocumentoCliente=1;// Asegúrate de tener el nombre correcto del campo
+             $nuevoDocumento->save();
+         }
+     }
 }
 
 
